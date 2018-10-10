@@ -1,5 +1,5 @@
 language: csharp
-solution: Asphalt-ModKit/Asphalt-ModKit.sln
+solution: ayan4m1/Asphalt-ModKit/Asphalt-ModKit.sln
 mono:
   - latest
   - 5.8.0
