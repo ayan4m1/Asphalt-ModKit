@@ -43,18 +43,15 @@
     <Compile Include="TestEventHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <PackageReference Include="EcoServer">
+      <Version>0.7.7.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Asphalt-ModKit\Asphalt-ModKit.csproj">
       <Project>{bbea3dfa-52e0-448d-832f-c7bf96e3f3e8}</Project>
       <Name>Asphalt-ModKit</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="EcoServer">
-      <Version>0.7.7.2</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

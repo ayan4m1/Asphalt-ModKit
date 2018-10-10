@@ -159,10 +159,6 @@
     <Compile Include="Util\WorldUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Asphalt-ModKit.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="EcoServer">
       <Version>0.7.7.2</Version>
     </PackageReference>
