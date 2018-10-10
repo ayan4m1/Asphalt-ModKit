@@ -1,6 +1,6 @@
-﻿using System;
-using Eco.Gameplay.Players;
+﻿using Eco.Gameplay.Players;
 using Eco.Gameplay.Systems.Chat;
+using System;
 
 namespace Asphalt.Chat.PageableList
 {

@@ -1,7 +1,5 @@
-using Eco.Core;
 using Eco.Core.Serialization;
 using Eco.ModKit;
-using Eco.Server;
 using Eco.Shared.Utils;
 using Harmony;
 using System;
@@ -41,7 +39,7 @@ namespace Asphalt.Service
             }
         }
     }
-  
+
     [HarmonyPatch(typeof(Eco.Server.PluginManager), "InitializePlugins")]
     internal static class EnablePatch
     {
@@ -58,7 +56,7 @@ namespace Asphalt.Service
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(DataStore), "Unlock")]
     internal static class PostEnablePatch
     {

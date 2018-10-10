@@ -1,10 +1,4 @@
-﻿using Asphalt.Service;
-using Asphalt.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Asphalt.Util;
 
 namespace Asphalt.Storeable.Items
 {

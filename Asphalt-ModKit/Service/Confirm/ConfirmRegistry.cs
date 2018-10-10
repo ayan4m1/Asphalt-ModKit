@@ -1,4 +1,5 @@
-﻿/** 
+﻿using Eco.Gameplay.Players;
+/** 
 * ------------------------------------
 * Copyright (c) 2018 [Kronox]
 * See LICENSE file in the project root for full license information.
@@ -8,7 +9,6 @@
 **/
 
 using System.Collections.Generic;
-using Eco.Gameplay.Players;
 
 namespace Asphalt.Service.Confirm
 {

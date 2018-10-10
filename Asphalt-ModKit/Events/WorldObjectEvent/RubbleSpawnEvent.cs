@@ -1,12 +1,5 @@
 ﻿using Asphalt.Api.Event;
-using Eco.Gameplay.Components;
-using Eco.Gameplay.Items;
 using Eco.Gameplay.Objects;
-using Eco.Gameplay.Players;
-using Eco.Shared.Math;
-using Eco.Shared.Networking;
-using Eco.Shared.Serialization;
-using System;
 using System.Reflection;
 
 namespace Asphalt.Events.WorldObjectEvent

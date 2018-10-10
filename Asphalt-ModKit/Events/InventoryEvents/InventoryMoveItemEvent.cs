@@ -1,10 +1,6 @@
 ﻿using Asphalt.Api.Event;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
-using Eco.Shared.Networking;
-using Eco.Shared.Serialization;
-using System;
-using System.Reflection;
 
 namespace Asphalt.Events.InventoryEvents
 {

@@ -1,5 +1,5 @@
-﻿using Eco.Core.Plugins.Interfaces;
-using Asphalt.Api.Event;
+﻿using Asphalt.Api.Event;
+using Eco.Core.Plugins.Interfaces;
 
 namespace EcoTestEventPlugin
 {

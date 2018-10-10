@@ -1,11 +1,9 @@
 ﻿using Eco.Core.Plugins.Interfaces;
-using Eco.Shared.Utils;
 using Harmony;
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Principal;
 
 namespace Asphalt.Api
 {
