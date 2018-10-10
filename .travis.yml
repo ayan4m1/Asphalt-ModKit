@@ -1,0 +1,8 @@
+language: csharp
+solution: Asphalt-ModKit/Asphalt-ModKit.sln
+mono:
+  - latest
+  - 5.0
+  - 4.5
+  - 4.0
+  - 3.5
