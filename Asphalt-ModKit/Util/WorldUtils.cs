@@ -61,7 +61,7 @@ namespace Asphalt.Util
 
             if (gridStep.x <= 0 || gridStep.y <= 0)
                 throw new ArgumentOutOfRangeException("gridStep", "Argument must contain positive components only.");
-            
+
             // Loop bounds for X dimension:
             int i1 = (int)Math.Ceiling((pCircleCenter.x - pGridCenter.x - pRadius) / gridStep.x);
             int i2 = (int)Math.Floor((pCircleCenter.x - pGridCenter.x + pRadius) / gridStep.x);

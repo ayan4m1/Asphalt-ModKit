@@ -47,7 +47,7 @@ namespace Asphalt.Service
         public bool HasAttribute(Type pAttributeType)
         {
             // It's mampfs fault, complain to him.
-            if(FieldInfo == null)
+            if (FieldInfo == null)
                 return PropertyInfo.CustomAttributes.Any(c => c.AttributeType == pAttributeType);
             return FieldInfo.CustomAttributes.Any(c => c.AttributeType == pAttributeType);
         }

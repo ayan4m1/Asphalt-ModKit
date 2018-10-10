@@ -235,13 +235,13 @@ namespace Asphalt.Util
                     n10, n11, n12, n13,
                     n20, n21, n22, n23);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public AffineTransform Translate(Vector3i vec)
         {
             return Translate(vec.x, vec.y, vec.z);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public AffineTransform Translate(float x, float y, float z)
         {

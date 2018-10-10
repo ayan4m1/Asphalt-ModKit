@@ -16,7 +16,7 @@ namespace Asphalt.Storeable
         public GenericStoreable(T t)
         {
             this.Set(t);
-        } 
+        }
 
         public T Get()
         {

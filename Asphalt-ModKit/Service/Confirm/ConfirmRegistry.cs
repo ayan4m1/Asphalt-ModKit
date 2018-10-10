@@ -16,11 +16,12 @@ namespace Asphalt.Service.Confirm
     {
         public static Dictionary<User, IConfirmable> confirm = new Dictionary<User, IConfirmable>();
 
-        private static class InstanceHolder {
-           public static ConfirmRegistry INSTANCE = new ConfirmRegistry();
+        private static class InstanceHolder
+        {
+            public static ConfirmRegistry INSTANCE = new ConfirmRegistry();
         }
 
-        private ConfirmRegistry() {}
+        private ConfirmRegistry() { }
 
         public static ConfirmRegistry GetInstance()
         {
@@ -31,7 +32,8 @@ namespace Asphalt.Service.Confirm
         {
             IConfirmable confirmable;
 
-            if (confirm.TryGetValue(user, out confirmable)) {
+            if (confirm.TryGetValue(user, out confirmable))
+            {
                 confirmable.Invalidate();
                 confirm.Remove(user);
             }

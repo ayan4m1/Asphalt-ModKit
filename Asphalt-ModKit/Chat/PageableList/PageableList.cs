@@ -36,7 +36,7 @@ namespace Asphalt.Chat.PageableList
 
             int startIndex = (EntriesPerPage * (page));
             int z = startIndex;
-            while(z < Content.Length && z < startIndex + EntriesPerPage)
+            while (z < Content.Length && z < startIndex + EntriesPerPage)
             {
                 ChatManager.ServerMessageToPlayerAlreadyLocalized(Content[z], user);
                 z++;
@@ -50,7 +50,7 @@ namespace Asphalt.Chat.PageableList
 
         public void PrintFooter(User user, int page)
         {
-            ChatManager.ServerMessageToPlayerAlreadyLocalized(FooterMask+$" page {page}/{GetPageCount()}", user);
+            ChatManager.ServerMessageToPlayerAlreadyLocalized(FooterMask + $" page {page}/{GetPageCount()}", user);
         }
     }
 }
