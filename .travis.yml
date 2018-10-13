@@ -1,7 +1,6 @@
 language: csharp
 solution: Asphalt.sln
 after_script:
-  - cd Asphalt
   - ./package.sh
 mono:
   - latest
