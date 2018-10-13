@@ -1,5 +1,8 @@
 language: csharp
 solution: Asphalt.sln
+after_script:
+  - cd Asphalt-ModKit
+  - ./package.sh
 mono:
   - latest
 #  - 5.8.0
