@@ -2,7 +2,5 @@
 
 namespace Asphalt
 {
-    public class InjectAttribute : Attribute
-    {
-    }
+    public class InjectAttribute : Attribute { }
 }

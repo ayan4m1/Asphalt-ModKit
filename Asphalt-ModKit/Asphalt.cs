@@ -18,9 +18,9 @@ namespace Asphalt.Api
             try
             {
                 AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-
-                Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
-                Harmony.PatchAll(Assembly.GetExecutingAssembly());  //Patch injections for default Services onEnable etc.
+            //Patch injections for default Services onEnable etc.
+            Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
+            Harmony.PatchAll(Assembly.GetExecutingAssembly());
 
                 IsInitialized = true;
 
