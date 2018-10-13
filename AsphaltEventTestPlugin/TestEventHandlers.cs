@@ -5,7 +5,7 @@ using Asphalt.Events.InventoryEvents;
 using Asphalt.Events.WorldObjectEvent;
 using System;
 
-namespace EcoTestEventPlugin
+namespace AsphaltEventTestPlugin
 {
     public class TestEventHandlers
     {

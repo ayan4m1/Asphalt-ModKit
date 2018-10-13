@@ -1,13 +1,13 @@
 ﻿using Asphalt.Api.Event;
 using Eco.Core.Plugins.Interfaces;
 
-namespace EcoTestEventPlugin
+namespace AsphaltEventTestPlugin
 {
-    public class EcoTestEventPlugin : IModKitPlugin, IServerPlugin
+    public class AsphaltEventTestPlugin : IModKitPlugin, IServerPlugin
     {
         public static TestEventHandlers TestListener { get; protected set; }
 
-        public EcoTestEventPlugin()
+        public AsphaltEventTestPlugin()
         {
             TestListener = new TestEventHandlers();
 
