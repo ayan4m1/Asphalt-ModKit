@@ -114,3 +114,4 @@ UpgradeLog*.htm
 
 *.dll
 *.cache
+nuget.exe
