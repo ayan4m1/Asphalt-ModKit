@@ -48,7 +48,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Asphalt-ModKit\Asphalt.csproj">
+    <ProjectReference Include="..\Asphalt\Asphalt.csproj">
       <Project>{bbea3dfa-52e0-448d-832f-c7bf96e3f3e8}</Project>
       <Name>Asphalt</Name>
     </ProjectReference>

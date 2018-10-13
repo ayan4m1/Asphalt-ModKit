@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asphalt", "Asphalt-ModKit\Asphalt.csproj", "{BBEA3DFA-52E0-448D-832F-C7BF96E3F3E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asphalt", "Asphalt\Asphalt.csproj", "{BBEA3DFA-52E0-448D-832F-C7BF96E3F3E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltEventTestPlugin", "Asphalt-ModKit-ExamplePlugin\AsphaltEventTestPlugin.csproj", "{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltEventTestPlugin", "AsphaltEventTestPlugin\AsphaltEventTestPlugin.csproj", "{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
