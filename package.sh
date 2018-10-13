@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 if [ -z "$TRAVIS_BUILD_NUMBER" ]; then
 	VERSION=1
 else
