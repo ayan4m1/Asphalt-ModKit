@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>AsphaltModKit</id>
+    <version>$version$</version>
+    <authors>Eco Mods Developers</authors>
+    <owners>Eco Mods Developers</owners>
+    <projectUrl>https://github.com/EcoModsDevelopers</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A universal framework and library for Eco Mod developers.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>MIT</copyright>
+    <tags>Eco Game Unity Mod</tags>
+    <dependencies>
+      <dependency id="SharpYaml" version="1.6.4" />
+      <dependency id="EcoServer" version="0.7.7.2" />
+      <dependency id="Lib.Harmony" version="1.2.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+     <file src="bin\x64\Release\AsphaltModKit.dll" target="lib\net471" />
+     <file src="bin\x64\Release\AsphaltModKit.pdb" target="lib\net471" />
+   </files>
+</package>

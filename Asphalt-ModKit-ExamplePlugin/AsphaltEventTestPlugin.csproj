@@ -7,8 +7,8 @@
     <ProjectGuid>{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EcoTestEventPlugin</RootNamespace>
-    <AssemblyName>EcoTestEventPlugin</AssemblyName>
+    <RootNamespace>AsphaltEventTestPlugin</RootNamespace>
+    <AssemblyName>AsphaltEventTestPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,9 +48,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Asphalt-ModKit\Asphalt-ModKit.csproj">
+    <ProjectReference Include="..\Asphalt-ModKit\Asphalt.csproj">
       <Project>{bbea3dfa-52e0-448d-832f-c7bf96e3f3e8}</Project>
-      <Name>Asphalt-ModKit</Name>
+      <Name>Asphalt</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
