@@ -10,8 +10,6 @@ namespace Asphalt.Api
 {
     public class Asphalt : IModKitPlugin
     {
-        public static bool IsInitialized { get; protected set; }
-
         public static HarmonyInstance Harmony { get; protected set; }
 
         static Asphalt()
@@ -23,7 +21,6 @@ namespace Asphalt.Api
             Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
             Harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-                IsInitialized = true;
 
                 if (File.Exists("dumpdlls.txt"))
                     DllDumper.DumpDlls();
@@ -68,7 +65,7 @@ namespace Asphalt.Api
 
         public string GetStatus()
         {
-            return IsInitialized ? "Complete!" : "Initializing...";
+            return "Initialized!";
         }
 
         public override string ToString()
