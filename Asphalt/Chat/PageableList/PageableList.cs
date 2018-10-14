@@ -24,15 +24,17 @@ namespace Asphalt.Chat
             return (Content.Length - 1) / (EntriesPerPage + 1);
         }
 
-        public bool IsValidPage(int page)
+        private void AssertValidPage(int page)
         {
-            return page > 0 && page < GetPageCount();
+            if (!(page > 0 && page < GetPageCount()))
+            {
+                throw new ArgumentOutOfRangeException($"Page '{page}' is not a value between '0' and '{GetPageCount()}' in PageableList!");
+            }
         }
 
         public void Print(User user, int page)
         {
-            if (!IsValidPage(page))
-                throw new ArgumentOutOfRangeException($"Page '{page}' is not a value between '0' and '{GetPageCount()}' in PageableList!");
+            AssertValidPage(page);
 
             int startIndex = (EntriesPerPage * (page));
             int z = startIndex;

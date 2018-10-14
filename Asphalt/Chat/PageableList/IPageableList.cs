@@ -10,7 +10,6 @@ namespace Asphalt.Chat
         string[] Content { get; set; }
 
         int GetPageCount();
-        bool IsValidPage(int page);
         void PrintHeader(User user, int page);
         void PrintFooter(User user, int page);
         void Print(User user, int page);
