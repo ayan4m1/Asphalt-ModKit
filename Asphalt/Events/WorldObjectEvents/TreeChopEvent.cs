@@ -1,12 +1,14 @@
 ﻿using Eco.Gameplay.Interactions;
 using Eco.Shared.Networking;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when a tree (or stump, branch, slice) is hit with an axe.
     /// </summary>
-    public class TreeChopEvent : CancellableEvent
+    public class TreeChopEvent : CancelEventArgs
     {
         public TreeEntity TreeEntity { get; set; }
         public INetObject Damager { get; set; }
@@ -27,11 +29,11 @@ namespace Asphalt.Events.WorldObjectEvents
         public static bool Prefix(ref TreeEntity __instance, INetObject damager, float amount, InteractionContext context)
         {
             var tce = new TreeChopEvent(ref __instance, ref damager, ref amount, ref context);
-            var tceEvent = (IEvent)tce;
+            var tceEvent = (EventArgs)tce;
 
             EventManager.CallEvent(ref tceEvent);
 
-            return tce.IsCancelled();
+            return tce.Cancel;
         }
     }
 }

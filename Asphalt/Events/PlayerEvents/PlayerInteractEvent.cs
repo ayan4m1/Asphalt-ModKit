@@ -3,13 +3,14 @@ using Eco.Gameplay.Players;
 using Eco.Shared.Items;
 using Eco.Simulation.WorldLayers;
 using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player interacts with something
     /// </summary>
-    public class PlayerInteractEvent : CancellableEvent
+    public class PlayerInteractEvent : CancelEventArgs
     {
         public InteractionContext Context { get; set; }
 
@@ -24,11 +25,11 @@ namespace Asphalt.Events.PlayerEvents
         public static void Postfix(this InteractionInfo info, ref InteractionContext __result)
         {
             PlayerInteractEvent playerInteractEvent = new PlayerInteractEvent(ref __result);
-            IEvent playerInteractIEvent = playerInteractEvent;
+            EventArgs playerInteractEventArgs = playerInteractEvent;
 
-            EventManager.CallEvent(ref playerInteractIEvent);
+            EventManager.CallEvent(ref playerInteractEventArgs);
 
-            if (playerInteractEvent.IsCancelled())
+            if (playerInteractEvent.Cancel)
             {
                 //we can not really cancel the event, but we remove all targets ;)
 

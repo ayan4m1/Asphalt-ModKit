@@ -2,10 +2,12 @@
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 using Eco.Simulation.Agents;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
-    public class PlayerHarvestEvent : CancellableEvent
+    public class PlayerHarvestEvent : CancelEventArgs
     {
         public Player Player { get; set; }
 
@@ -23,11 +25,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref Player player, ref Organism target, ref IAtomicAction __result)
         {
             PlayerHarvestEvent cEvent = new PlayerHarvestEvent(ref player, ref target);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

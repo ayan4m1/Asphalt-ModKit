@@ -1,12 +1,14 @@
 ﻿using Eco.Gameplay.Players;
 using Eco.Shared.Math;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     ///  Called when a player teleports
     /// </summary>
-    public class PlayerTeleportEvent : CancellableEvent
+    public class PlayerTeleportEvent : CancelEventArgs
     {
         public Player Player { get; set; }
         public Vector3 Position { get; set; }
@@ -23,11 +25,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref Vector3 position, ref Player __instance)
         {
             PlayerTeleportEvent cEvent = new PlayerTeleportEvent(ref __instance, ref position);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            return !cEvent.IsCancelled();
+            return !cEvent.Cancel;
         }
     }
 }

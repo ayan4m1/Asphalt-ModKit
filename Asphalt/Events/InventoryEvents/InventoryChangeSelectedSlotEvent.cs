@@ -1,12 +1,13 @@
 ﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using System;
 
 namespace Asphalt.Events.InventoryEvents
 {
     /// <summary>
     /// Called when the Player changes the Selected Hotbar Slot
     /// </summary>
-    public class InventoryChangeSelectedSlotEvent : IEvent
+    public class InventoryChangeSelectedSlotEvent : EventArgs
     {
         public Player Player { get; protected set; }
         public int SelectedSlot { get; protected set; }
@@ -27,7 +28,7 @@ namespace Asphalt.Events.InventoryEvents
         public static void Prefix(Player player, int slot, SelectionInventory __instance)
         {
             InventoryChangeSelectedSlotEvent csse = new InventoryChangeSelectedSlotEvent(slot, player, __instance.SelectedStack, __instance);
-            IEvent csseEvent = csse;
+            EventArgs csseEvent = csse;
 
             EventManager.CallEvent(ref csseEvent);
         }

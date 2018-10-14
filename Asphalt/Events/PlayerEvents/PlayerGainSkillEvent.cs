@@ -2,13 +2,15 @@
 using Eco.Gameplay.Players;
 using Eco.Gameplay.Skills;
 using Eco.Shared.Localization;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player gains a skill
     /// </summary>
-    public class PlayerGainSkillEvent : CancellableEvent
+    public class PlayerGainSkillEvent : CancelEventArgs
     {
         public Player Player { get; set; }
 
@@ -26,11 +28,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref Player player, ref Skill skill, ref IAtomicAction __result)
         {
             PlayerGainSkillEvent cEvent = new PlayerGainSkillEvent(ref player, ref skill);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

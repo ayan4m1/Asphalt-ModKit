@@ -2,13 +2,15 @@
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 using Eco.Shared.Services;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player sends a chat message
     /// </summary>
-    public class PlayerSendMessageEvent : CancellableEvent
+    public class PlayerSendMessageEvent : CancelEventArgs
     {
         public User User { get; set; }
 
@@ -26,11 +28,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref User user, ref ChatMessage message, ref IAtomicAction __result)
         {
             PlayerSendMessageEvent cEvent = new PlayerSendMessageEvent(ref user, ref message);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

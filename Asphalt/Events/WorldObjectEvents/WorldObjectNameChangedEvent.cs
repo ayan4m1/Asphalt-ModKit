@@ -1,8 +1,9 @@
 ﻿using Eco.Gameplay.Objects;
+using System;
 
 namespace Asphalt.Events.WorldObjectEvents
 {
-    public class WorldObjectNameChangedEvent : IEvent
+    public class WorldObjectNameChangedEvent : EventArgs
     {
         public WorldObject WorldObject { get; protected set; }
 
@@ -25,9 +26,9 @@ namespace Asphalt.Events.WorldObjectEvents
                 return;
 
             WorldObjectNameChangedEvent cEvent = new WorldObjectNameChangedEvent(__instance);
-            IEvent iEvent = cEvent;
+            EventArgs EventArgs = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref EventArgs);
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
-    public class PlayerCompleteContractEvent : CancellableEvent
+    public class PlayerCompleteContractEvent : CancelEventArgs
     {
         public Player Player { get; set; }
 
@@ -19,11 +21,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref Player player, ref IAtomicAction __result)
         {
             PlayerCompleteContractEvent cEvent = new PlayerCompleteContractEvent(ref player);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

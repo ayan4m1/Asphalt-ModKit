@@ -11,6 +11,7 @@ using Asphalt.Exceptions;
 using Eco.Shared.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -41,9 +42,6 @@ namespace Asphalt.Events
                     throw new EventHandlerArgumentException("Incorrect number of arguments in method with EventHandlerAttribute!");
 
                 var parameterType = parameters[0].ParameterType;
-
-                if (!(parameterType is IEvent))
-                    throw new EventHandlerArgumentException("Specified argument is not a valid Event!");
 
                 lock (locker)
                 {
@@ -76,17 +74,17 @@ namespace Asphalt.Events
                 entry.Value.RemoveAll(x => x.Listener.Equals(pListener));
         }
         
-        public static void CallEvent(ref IEvent pEvent)
+        public static void CallEvent(ref EventArgs pEvent)
         {
             if (!handlers.ContainsKey(pEvent.GetType()))
                 return;
 
-            var cancellable = pEvent as ICancellable;
+            var cancellable = pEvent as CancelEventArgs;
             foreach (var eventHandlerData in handlers[pEvent.GetType()])
             {
                 try
                 {
-                    if (cancellable != null && cancellable.IsCancelled() && !eventHandlerData.RunIfEventCancelled)
+                    if (cancellable != null && cancellable.Cancel && !eventHandlerData.RunIfEventCancelled)
                         continue;
 
                     //Invoke EventHandler

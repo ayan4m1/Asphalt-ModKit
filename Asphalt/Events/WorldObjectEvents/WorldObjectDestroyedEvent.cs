@@ -1,8 +1,10 @@
 ﻿using Eco.Gameplay.Objects;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents
 {
-    public class WorldObjectDestroyedEvent : CancellableEvent
+    public class WorldObjectDestroyedEvent : CancelEventArgs
     {
         public WorldObject WorldObject { get; set; }
 
@@ -17,11 +19,11 @@ namespace Asphalt.Events.WorldObjectEvents
         public static bool Prefix(ref WorldObject __instance, ref bool __state)
         {
             WorldObjectDestroyedEvent dEvent = new WorldObjectDestroyedEvent(ref __instance);
-            IEvent iEvent = dEvent;
+            EventArgs args = dEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (dEvent.IsCancelled())
+            if (dEvent.Cancel)
                 return false;
 
             return true;

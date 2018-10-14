@@ -1,12 +1,14 @@
 ﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.InventoryEvents
 {
     /// <summary>
     /// Called when an Item in an Inventory gets moved
     /// </summary>
-    public class InventoryMoveItemEvent : CancellableEvent
+    public class InventoryMoveItemEvent : CancelEventArgs
     {
         public ItemStack SourceStack { get; protected set; }
         public ItemStack DestinationStack { get; protected set; }
@@ -25,11 +27,11 @@ namespace Asphalt.Events.InventoryEvents
         public static bool Prefix(ItemStack source, ItemStack destination, User user)
         {
             InventoryMoveItemEvent imie = new InventoryMoveItemEvent(source, destination, user);
-            IEvent imieEvent = imie;
+            EventArgs imieEvent = imie;
 
             EventManager.CallEvent(ref imieEvent);
 
-            if (imie.IsCancelled())
+            if (imie.Cancel)
                 return false;
 
             return true;

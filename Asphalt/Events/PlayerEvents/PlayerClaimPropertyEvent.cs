@@ -3,13 +3,14 @@ using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 using Eco.Shared.Math;
 using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player claims new property
     /// </summary>
-    public class PlayerClaimPropertyEvent : CancellableEvent
+    public class PlayerClaimPropertyEvent : CancelEventArgs
     {
         public User User { get; set; }
 
@@ -30,11 +31,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref Guid authId, ref User user, ref Vector2i position, ref IAtomicAction __result)
         {
             PlayerClaimPropertyEvent cEvent = new PlayerClaimPropertyEvent(ref authId, ref user, ref position);
-            IEvent iEvent = cEvent;
+            EventArgs EventArgs = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref EventArgs);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

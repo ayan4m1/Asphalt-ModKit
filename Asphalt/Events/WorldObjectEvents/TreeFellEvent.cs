@@ -1,11 +1,13 @@
 ﻿using Eco.Shared.Networking;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when a Tree is felled.
     /// </summary>
-    public class TreeFellEvent : CancellableEvent
+    public class TreeFellEvent : CancelEventArgs
     {
         public TreeEntity TreeEntity { get; set; }
         public INetObject Killer { get; set; }
@@ -22,11 +24,11 @@ namespace Asphalt.Events.WorldObjectEvents
         public static bool Prefix(ref TreeEntity __instance, ref INetObject killer)
         {
             var tfe = new TreeFellEvent(ref __instance, ref killer);
-            var tfeEvent = (IEvent)tfe;
+            var tfeEvent = (EventArgs)tfe;
 
             EventManager.CallEvent(ref tfeEvent);
 
-            if (tfe.IsCancelled())
+            if (tfe.Cancel)
             {
                 __instance.RPC("UpdateHP", __instance.Species.TreeHealth);
                 return false;

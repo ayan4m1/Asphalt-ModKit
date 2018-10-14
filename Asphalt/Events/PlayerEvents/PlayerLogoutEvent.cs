@@ -1,17 +1,18 @@
-﻿using Eco.Gameplay.Players;
+﻿using System;
+using Eco.Gameplay.Players;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     ///  Called when the user logs out
     /// </summary>
-    public class PlayerLogoutEvent : IEvent
+    public class PlayerLogoutEvent : EventArgs
     {
         public User User { get; protected set; }  //protected because we can't change it
 
-        public PlayerLogoutEvent(User pUser) : base()
+        public PlayerLogoutEvent(User user)
         {
-            this.User = pUser;
+            User = user;
         }
     }
 
@@ -20,9 +21,9 @@ namespace Asphalt.Events.PlayerEvents
         public static void Prefix(User __instance)
         {
             PlayerLogoutEvent cEvent = new PlayerLogoutEvent(__instance);
-            IEvent iEvent = cEvent;
+            EventArgs EventArgs = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref EventArgs);
         }
     }
 }

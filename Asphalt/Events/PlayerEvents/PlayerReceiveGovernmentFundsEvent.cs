@@ -2,10 +2,12 @@
 using Eco.Gameplay.Economy;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
-    public class PlayerReceiveGovernmentFundsEvent : CancellableEvent
+    public class PlayerReceiveGovernmentFundsEvent : CancelEventArgs
     {
         public User User { get; set; }
 
@@ -26,11 +28,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref User user, ref Currency currency, ref float amount, ref IAtomicAction __result)
         {
             PlayerReceiveGovernmentFundsEvent cEvent = new PlayerReceiveGovernmentFundsEvent(ref user, ref currency, ref amount);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;

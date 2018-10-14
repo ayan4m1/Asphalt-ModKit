@@ -12,14 +12,14 @@ namespace AsphaltEventTestPlugin
         [EventHandler(EventPriority.Normal, RunIfEventCancelled = false)]
         public void OnPlayerMessage(PlayerSendMessageEvent evt)
         {
-            //  evt.SetCancelled(true);
+            // evt.Cancel = true;
             Console.WriteLine(evt.Message.Text);
         }
 
         [EventHandler]
         public void OnPlayerInteract(PlayerInteractEvent evt)
         {
-            evt.SetCancelled(true);
+            evt.Cancel = true;
             Console.WriteLine(evt.Context.CarriedItem);
             Console.WriteLine(evt.Context.Player.FriendlyName);
         }
@@ -35,7 +35,7 @@ namespace AsphaltEventTestPlugin
         {
             Console.WriteLine("Teleport " + evt.Player.FriendlyName);
             Console.WriteLine(evt.Position);
-            //evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
         [EventHandler]
@@ -49,7 +49,7 @@ namespace AsphaltEventTestPlugin
         {
             Console.WriteLine("Craft " + evt.User.Player.FriendlyName);
             Console.WriteLine(evt.Table);
-            // evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
         [EventHandler]
@@ -57,7 +57,7 @@ namespace AsphaltEventTestPlugin
         {
             Console.WriteLine("GainSkill " + evt.Player.FriendlyName);
             Console.WriteLine(evt.Skill.FriendlyName);
-            // evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
         [EventHandler]
@@ -65,7 +65,7 @@ namespace AsphaltEventTestPlugin
         {
             Console.WriteLine("UnlearnSkill " + evt.Player.FriendlyName);
             Console.WriteLine(evt.Skill.FriendlyName);
-            // evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
         [EventHandler]
@@ -73,7 +73,7 @@ namespace AsphaltEventTestPlugin
         {
             Console.WriteLine("ClaimProperty " + evt.User.Player.FriendlyName);
             Console.WriteLine(evt.Position);
-            // evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
         [EventHandler]
@@ -88,7 +88,7 @@ namespace AsphaltEventTestPlugin
             Console.WriteLine(evt.WorldObject.ToString());
             //   Console.WriteLine(evt.User);
             //   Console.WriteLine(evt.Value);
-            //    evt.SetCancelled(true);
+            //    evt.Cancel = true;
             //     evt.Value = 1;
         }
 
@@ -108,7 +108,7 @@ namespace AsphaltEventTestPlugin
         [EventHandler]
         public void OnWorldPollute(WorldPolluteEvent evt)
         {
-            evt.SetCancelled(true);
+            evt.Cancel = true;
             Console.WriteLine(evt.User.ToString());
         }*/
 
@@ -135,7 +135,7 @@ namespace AsphaltEventTestPlugin
             if (!evt.DestinationStack.Empty) Console.Write($" to {evt.DestinationStack.Quantity}x {evt.DestinationStack.Item.FriendlyName}");
             Console.WriteLine("");
 
-            //evt.SetCancelled(true);
+            // evt.Cancel = true;
         }
 
 
@@ -160,7 +160,7 @@ namespace AsphaltEventTestPlugin
             Console.WriteLine($"SpawnRubbleEvent: spawned {evt.RubbleObject.GetType().ToString()} at {evt.RubbleObject.Position.ToString()}");
             //if (evt.RubbleObject.IsBreakable)
             //    evt.RubbleObject.Breakup();
-            //evt.SetCancelled(true);
+            //evt.Cancel = true;
         }
 
         [EventHandler]

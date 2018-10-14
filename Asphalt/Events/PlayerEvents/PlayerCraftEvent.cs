@@ -3,13 +3,15 @@ using Eco.Gameplay.Components;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
+using System;
+using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player press "order" on a craft interface
     /// </summary>
-    public class PlayerCraftEvent : CancellableEvent
+    public class PlayerCraftEvent : CancelEventArgs
     {
         public User User { get; set; }
 
@@ -30,11 +32,11 @@ namespace Asphalt.Events.PlayerEvents
         public static bool Prefix(ref User user, ref CraftingComponent table, ref Item item, ref IAtomicAction __result)
         {
             PlayerCraftEvent cEvent = new PlayerCraftEvent(ref user, ref table, ref item);
-            IEvent iEvent = cEvent;
+            EventArgs args = cEvent;
 
-            EventManager.CallEvent(ref iEvent);
+            EventManager.CallEvent(ref args);
 
-            if (cEvent.IsCancelled())
+            if (cEvent.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
                 return false;
