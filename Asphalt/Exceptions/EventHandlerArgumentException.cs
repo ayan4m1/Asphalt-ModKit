@@ -8,7 +8,7 @@
  **/
 using System;
 
-namespace Asphalt.AsphaltExceptions
+namespace Asphalt.Exceptions
 {
     public class EventHandlerArgumentException : Exception
     {
