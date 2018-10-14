@@ -16,6 +16,7 @@ namespace Asphalt.Events.WorldObjectEvents
         public WorldObjectChangeTextEvent(Player player, WorldObject obj, string text) : base()
         {
             Player = player;
+            WorldObject = obj;
             Text = text;
         }
     }
