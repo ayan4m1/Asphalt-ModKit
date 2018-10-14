@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SearchEasterEggsMod
+namespace AsphaltFindEasterEggsPlugin
 {
     public class CommandHandler : IChatCommandHandler
     {
         [ChatCommand("Create Easter Egg")]
         public static void CreateEasterEgg(User user)
         {
-            if (!SearchEasterEggsMod.PermissionChecker.CheckPermission(user, "easteregg.create"))  //CheckPermission will notify the user if he doesn't have permission
+            if (!AsphaltFindEasterEggsPlugin.PermissionChecker.CheckPermission(user, "easteregg.create"))  //CheckPermission will notify the user if he doesn't have permission
                 return;
 
             user.Player.SendTemporaryMessage($"Easter Egg created!");
@@ -23,10 +23,10 @@ namespace SearchEasterEggsMod
         [ChatCommand("Collect Easter Egg")]
         public static void CollectEasterEgg(User user)
         {
-            if (!SearchEasterEggsMod.PermissionChecker.CheckPermission(user, "easteregg.collect"))  //CheckPermission will notify the user if he doesn't have permission
+            if (!AsphaltFindEasterEggsPlugin.PermissionChecker.CheckPermission(user, "easteregg.collect"))  //CheckPermission will notify the user if he doesn't have permission
                 return;
 
-            IStorage userStorage = SearchEasterEggsMod.CollectedEggsStorage.GetStorage(user);
+            IStorage userStorage = AsphaltFindEasterEggsPlugin.CollectedEggsStorage.GetStorage(user);
 
             int collectedEggs = userStorage.GetInt("collectedEggs"); //if no value was stored before, this will return 0
 

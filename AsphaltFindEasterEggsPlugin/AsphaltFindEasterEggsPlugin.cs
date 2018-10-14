@@ -5,10 +5,10 @@ using Asphalt;
 using Asphalt.Service.Permissions;
 using System;
 
-namespace SearchEasterEggsMod
+namespace AsphaltFindEasterEggsPlugin
 {
     [AsphaltPlugin]
-    public class SearchEasterEggsMod : IModKitPlugin
+    public class AsphaltFindEasterEggsPlugin : IModKitPlugin
     {
         [Inject]
         [StorageLocation("Config")]
@@ -22,7 +22,7 @@ namespace SearchEasterEggsMod
         [Inject]
         public static IPermissionService PermissionChecker { get; set; }
 
-        public SearchEasterEggsMod()
+        public AsphaltFindEasterEggsPlugin()
         {
             
         }

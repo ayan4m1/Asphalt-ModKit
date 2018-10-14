@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asphalt", "Asphalt\Asphalt.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltEventTestPlugin", "AsphaltEventTestPlugin\AsphaltEventTestPlugin.csproj", "{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltFindEasterEggsPlugin", "AsphaltFindEasterEggsPlugin\AsphaltFindEasterEggsPlugin.csproj", "{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}.Debug|x64.Build.0 = Debug|x64
 		{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}.Release|x64.ActiveCfg = Release|x64
 		{C5B1B3A5-DA9F-48C4-8B17-F9C9A0079611}.Release|x64.Build.0 = Release|x64
+		{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}.Debug|x64.ActiveCfg = Debug|x64
+		{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}.Debug|x64.Build.0 = Debug|x64
+		{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}.Release|x64.ActiveCfg = Release|x64
+		{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
