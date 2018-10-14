@@ -18,7 +18,6 @@ namespace Asphalt.Events
 {
     public static class EventManager
     {
-
         private static readonly EventHandlerComparer eventHandlerComparer = new EventHandlerComparer();
 
         //<type of parameter from registered event, List<registered event>>
@@ -26,27 +25,24 @@ namespace Asphalt.Events
 
         private static object locker = new object();
 
-
-        //Registration
-
         public static void RegisterListener(object pListener)
         {
-            MethodInfo[] methods = pListener.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance); //static ?!?
+            var methods = pListener.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance); //static ?!?
 
-            foreach (MethodInfo method in methods)
+            foreach (var method in methods)
             {
-                EventHandlerAttribute attribute = method.GetCustomAttributes<EventHandlerAttribute>(false)?.FirstOrDefault();
+                var attribute = method.GetCustomAttributes<EventHandlerAttribute>(false)?.FirstOrDefault();
 
                 if (attribute == null)
                     continue;
 
-                ParameterInfo[] parameters = method.GetParameters();
+                var parameters = method.GetParameters();
                 if (parameters.Length != 1)
                     throw new EventHandlerArgumentException("Incorrect number of arguments in method with EventHandlerAttribute!");
 
-                Type parameterType = parameters[0].ParameterType;
+                var parameterType = parameters[0].ParameterType;
 
-                if (!typeof(IEvent).IsAssignableFrom(parameterType))
+                if (!(parameterType is IEvent))
                     throw new EventHandlerArgumentException("Specified argument is not a valid Event!");
 
                 lock (locker)
@@ -79,23 +75,18 @@ namespace Asphalt.Events
             foreach (KeyValuePair<Type, List<EventHandlerData>> entry in handlers)
                 entry.Value.RemoveAll(x => x.Listener.Equals(pListener));
         }
-
-        //Execution
-
+        
         public static void CallEvent(ref IEvent pEvent)
         {
-            //        Console.WriteLine(pEvent);
-
             if (!handlers.ContainsKey(pEvent.GetType()))
                 return;
 
-            bool cancelable = pEvent.GetType().GetInterfaces().Contains(typeof(ICancellable));
-
+            var cancellable = pEvent as ICancellable;
             foreach (var eventHandlerData in handlers[pEvent.GetType()])
             {
                 try
                 {
-                    if (cancelable && ((ICancellable)pEvent).IsCancelled() && !eventHandlerData.RunIfEventCancelled)
+                    if (cancellable != null && cancellable.IsCancelled() && !eventHandlerData.RunIfEventCancelled)
                         continue;
 
                     //Invoke EventHandler
