@@ -1,11 +1,10 @@
-﻿using Asphalt.Events;
-using Eco.Core.Utils.AtomicAction;
+﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Components;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player press "order" on a craft interface

@@ -1,6 +1,6 @@
 ﻿using Eco.Gameplay.Players;
 
-namespace Asphalt.Chat.PageableList
+namespace Asphalt.Chat
 {
     interface IPageableList
     {

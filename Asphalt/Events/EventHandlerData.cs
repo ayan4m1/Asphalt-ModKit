@@ -1,5 +1,4 @@
-﻿using Asphalt.Api.Event;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 
 namespace Asphalt.Events

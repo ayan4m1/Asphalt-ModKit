@@ -1,8 +1,8 @@
-﻿using Asphalt.Api.Event;
-using Asphalt.Api.Event.PlayerEvents;
-using Asphalt.Api.Event.RpcEvents;
+﻿using Asphalt.Events;
 using Asphalt.Events.InventoryEvents;
-using Asphalt.Events.WorldObjectEvent;
+using Asphalt.Events.PlayerEvents;
+using Asphalt.Events.RpcEvents;
+using Asphalt.Events.WorldObjectEvents;
 using System;
 
 namespace AsphaltEventTestPlugin

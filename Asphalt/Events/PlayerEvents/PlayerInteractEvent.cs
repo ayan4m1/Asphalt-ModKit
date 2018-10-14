@@ -1,11 +1,10 @@
-﻿using Asphalt.Events;
-using Eco.Gameplay.Interactions;
+﻿using Eco.Gameplay.Interactions;
 using Eco.Gameplay.Players;
 using Eco.Shared.Items;
 using Eco.Simulation.WorldLayers;
 using System;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     /// Called when a player interacts with something

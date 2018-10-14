@@ -1,8 +1,7 @@
-﻿using Asphalt.Events;
-using Eco.Gameplay.Players;
+﻿using Eco.Gameplay.Players;
 using Eco.Shared.Math;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     ///  Called when a player teleports

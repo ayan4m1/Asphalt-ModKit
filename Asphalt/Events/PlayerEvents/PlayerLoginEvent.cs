@@ -1,7 +1,7 @@
 ﻿using Eco.Gameplay.Players;
 using Eco.Shared.Networking;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     ///  Called when the loading screen of a user appears

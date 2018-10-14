@@ -1,6 +1,6 @@
 ﻿using Eco.Gameplay.Players;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     /// <summary>
     ///  Called when the user logs out

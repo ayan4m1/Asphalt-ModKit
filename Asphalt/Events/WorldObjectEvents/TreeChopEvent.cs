@@ -1,13 +1,7 @@
-﻿using Asphalt.Api.Event;
-using Eco.Gameplay.Interactions;
+﻿using Eco.Gameplay.Interactions;
 using Eco.Shared.Networking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Asphalt.Events.WorldObjectEvent
+namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when a tree (or stump, branch, slice) is hit with an axe.

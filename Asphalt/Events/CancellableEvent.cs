@@ -1,6 +1,4 @@
-﻿using Asphalt.Api.Event;
-
-namespace Asphalt.Events
+﻿namespace Asphalt.Events
 {
     public abstract class CancellableEvent : ICancellable, IEvent
     {

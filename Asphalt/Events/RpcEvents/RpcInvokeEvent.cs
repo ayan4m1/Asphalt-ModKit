@@ -1,7 +1,6 @@
-﻿using Asphalt.Events;
-using Eco.Shared.Serialization;
+﻿using Eco.Shared.Serialization;
 
-namespace Asphalt.Api.Event.RpcEvents
+namespace Asphalt.Events.RpcEvents
 {
     /// <summary>
     /// Called when an RPC-Event gets invoked

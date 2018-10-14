@@ -1,8 +1,7 @@
-﻿using Asphalt.Events;
-using Eco.Gameplay.Items;
+﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     public class PlayerEatEvent : CancellableEvent
     {

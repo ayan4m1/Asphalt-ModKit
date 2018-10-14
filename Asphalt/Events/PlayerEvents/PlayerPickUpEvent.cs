@@ -1,11 +1,10 @@
-﻿using Asphalt.Events;
-using Eco.Core.Utils.AtomicAction;
+﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 using Eco.Shared.Math;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.PlayerEvents
 {
     public class PlayerPickUpEvent : CancellableEvent
     {

@@ -1,4 +1,4 @@
-﻿using Asphalt.Api.Event;
+﻿using Asphalt.Events;
 using Eco.Core.Plugins.Interfaces;
 
 namespace AsphaltEventTestPlugin

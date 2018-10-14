@@ -1,7 +1,6 @@
-﻿using Asphalt.Api.Event;
-using Eco.Shared.Networking;
+﻿using Eco.Shared.Networking;
 
-namespace Asphalt.Events.WorldObjectEvent
+namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when a Tree is felled.

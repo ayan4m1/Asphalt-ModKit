@@ -1,5 +1,4 @@
-﻿using Asphalt.Api.Event;
-using Eco.Gameplay.Items;
+﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 
 namespace Asphalt.Events.InventoryEvents

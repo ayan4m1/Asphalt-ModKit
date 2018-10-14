@@ -9,7 +9,7 @@
 
 using System;
 
-namespace Asphalt.Api.Event
+namespace Asphalt.Events
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class EventHandlerAttribute : Attribute

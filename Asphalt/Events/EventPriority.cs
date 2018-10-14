@@ -7,7 +7,7 @@
  * ------------------------------------
  **/
 
-namespace Asphalt.Api.Event
+namespace Asphalt.Events
 {
     /**
      * Events are called from HIGHEST to LOWEST.

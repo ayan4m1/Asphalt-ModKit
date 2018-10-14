@@ -1,6 +1,6 @@
 ﻿using Eco.Gameplay.Objects;
 
-namespace Asphalt.Api.Event.PlayerEvents
+namespace Asphalt.Events.WorldObjectEvents
 {
     public class WorldObjectNameChangedEvent : IEvent
     {

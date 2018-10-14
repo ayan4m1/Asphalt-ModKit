@@ -1,10 +1,9 @@
-﻿using Asphalt.Api.Event;
-using Eco.Core.Utils.AtomicAction;
+﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Objects;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 
-namespace Asphalt.Events.WorldObjectEvent
+namespace Asphalt.Events.WorldObjectEvents
 {
     public class WorldObjectPickupEvent : CancellableEvent
     {

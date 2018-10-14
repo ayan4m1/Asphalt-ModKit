@@ -2,7 +2,7 @@
 using Eco.Gameplay.Systems.Chat;
 using System;
 
-namespace Asphalt.Chat.PageableList
+namespace Asphalt.Chat
 {
     public class PageableList : IPageableList
     {

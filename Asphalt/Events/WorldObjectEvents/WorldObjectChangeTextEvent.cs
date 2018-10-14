@@ -1,9 +1,8 @@
-﻿using Asphalt.Api.Event;
-using Eco.Gameplay.Components;
+﻿using Eco.Gameplay.Components;
 using Eco.Gameplay.Objects;
 using Eco.Gameplay.Players;
 
-namespace Asphalt.Events.WorldObjectEvent
+namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when an SignText gets set

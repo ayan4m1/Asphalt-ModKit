@@ -8,14 +8,13 @@
  **/
 
 using Asphalt.AsphaltExceptions;
-using Asphalt.Events;
 using Eco.Shared.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Asphalt.Api.Event
+namespace Asphalt.Events
 {
     public static class EventManager
     {

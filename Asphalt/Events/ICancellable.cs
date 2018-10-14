@@ -7,7 +7,7 @@
  * ------------------------------------
  **/
 
-namespace Asphalt.Api.Event
+namespace Asphalt.Events
 {
     public interface ICancellable
     {

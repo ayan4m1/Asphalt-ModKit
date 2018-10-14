@@ -3,7 +3,7 @@ using Harmony;
 using System.IO;
 using System.Reflection;
 
-namespace Asphalt.Api
+namespace Asphalt
 {
     public class Asphalt : IModKitPlugin
     {

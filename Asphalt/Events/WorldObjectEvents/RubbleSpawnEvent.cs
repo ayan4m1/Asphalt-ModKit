@@ -1,8 +1,7 @@
-﻿using Asphalt.Api.Event;
-using Eco.Gameplay.Objects;
+﻿using Eco.Gameplay.Objects;
 using System.Reflection;
 
-namespace Asphalt.Events.WorldObjectEvent
+namespace Asphalt.Events.WorldObjectEvents
 {
     /// <summary>
     /// Called when an RubbleObject is added to the World
@@ -24,7 +23,7 @@ namespace Asphalt.Events.WorldObjectEvent
             if (!(ecoObject is RubbleObject))
                 return;
 
-            RubbleObject rubble = (RubbleObject) ecoObject;
+            RubbleObject rubble = (RubbleObject)ecoObject;
 
             RubbleSpawnEvent sre = new RubbleSpawnEvent(ref rubble);
             IEvent sreEvent = sre;

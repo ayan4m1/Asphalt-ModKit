@@ -39,19 +39,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asphalt.cs" />
-    <Compile Include="AsphaltExceptions\ServiceAlreadyExistingException.cs" />
-    <Compile Include="AsphaltExceptions\ServiceInitException.cs" />
-    <Compile Include="AsphaltExceptions\ServiceNotKnownException.cs" />
-    <Compile Include="AsphaltExceptions\ServiceReloadException.cs" />
-    <Compile Include="AsphaltExceptions\TimeoutException.cs" />
     <Compile Include="AsphaltPluginAttribute.cs" />
     <Compile Include="Chat\PageableList\IPageableList.cs" />
     <Compile Include="Chat\PageableList\PageableList.cs" />
     <Compile Include="DllDumper.cs" />
-    <Compile Include="Events\WorldObjectEvent\TreeChopEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\TreeFellEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\RubbleSpawnEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectChangeTextEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\TreeChopEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\TreeFellEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\RubbleSpawnEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectChangeTextEvent.cs" />
     <Compile Include="Events\CancellableEvent.cs" />
     <Compile Include="Events\EventManagerHelper.cs" />
     <Compile Include="Events\IEvent.cs" />
@@ -83,15 +78,15 @@
     <Compile Include="Events\PlayerEvents\PlayerInteractEvent.cs" />
     <Compile Include="Events\PlayerEvents\PlayerCraftEvent.cs" />
     <Compile Include="Events\PlayerEvents\PlayerSendMessageEvent.cs" />
-    <Compile Include="AsphaltExceptions\EventHandlerArgumentException.cs" />
+    <Compile Include="Exceptions\EventHandlerArgumentException.cs" />
     <Compile Include="Events\PlayerEvents\PlayerUnlearnSkillEvent.cs" />
     <Compile Include="Events\RpcEvents\RpcInvokeEvent.cs" />
     <Compile Include="Events\WorldEvents\WorldPolluteEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectDestroyedEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectEnabledChangedEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectNameChangedEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectOperatingChangedEvent.cs" />
-    <Compile Include="Events\WorldObjectEvent\WorldObjectPickupEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectDestroyedEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectEnabledChangedEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectNameChangedEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectOperatingChangedEvent.cs" />
+    <Compile Include="Events\WorldObjectEvents\WorldObjectPickupEvent.cs" />
     <Compile Include="InjectAttribute.cs" />
     <Compile Include="Service\IDisableable.cs" />
     <Compile Include="Service\IReloadable.cs" />
