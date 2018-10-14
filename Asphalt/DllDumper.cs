@@ -6,7 +6,7 @@ namespace Asphalt
 {
     public static class DllDumper
     {
-        private static string[] mAssemblies = new[]
+        private static string[] assemblies = new[]
         {
             "Eco.Core.dll",
             "Eco.Gameplay.dll",
@@ -20,15 +20,15 @@ namespace Asphalt
 
         public static void DumpDlls()
         {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssembly = Assembly.GetEntryAssembly();
 
-            string destDir = Path.Combine(Path.GetDirectoryName(entryAssembly.Location), "extracted");
+            var destDir = Path.Combine(Path.GetDirectoryName(entryAssembly.Location), "extracted");
             Directory.CreateDirectory(destDir);
 
-            foreach (string assembly in mAssemblies)
+            foreach (var assembly in assemblies)
             {
-                string asmname = $"costura.{assembly}.compressed".ToLower();
-                string destFileName = Path.Combine(destDir, assembly);
+                var asmname = $"costura.{assembly}.compressed".ToLower();
+                var destFileName = Path.Combine(destDir, assembly);
 
                 File.Delete(destFileName);
 

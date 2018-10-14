@@ -59,7 +59,7 @@ namespace Asphalt.Service
 
         public StorageLocationAttribute GetStorageLocationAttribute()
         {
-            return (StorageLocationAttribute)GetAttribute(typeof(StorageLocationAttribute));
+            return (StorageLocationAttribute) GetAttribute(typeof(StorageLocationAttribute));
         }
 
         public Attribute GetAttribute(Type pAttributeType)
