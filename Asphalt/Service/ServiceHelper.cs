@@ -49,16 +49,16 @@ namespace Asphalt.Service
             if (!IsAsphaltPlugin(pServerPlugin))
                 return;
 
-            foreach (PropertyFieldInfo pfi in Injection.GetPropertyFieldInfos(pServerPlugin, typeof(IPermissionService)))
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IPermissionService)))
                 InjectPermissions(pServerPlugin, pfi);
 
-            foreach (PropertyFieldInfo pfi in Injection.GetPropertyFieldInfos(pServerPlugin, typeof(IStorage)))
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IStorage)))
                 Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IStorage)), pfi);
 
-            foreach (PropertyFieldInfo pfi in Injection.GetPropertyFieldInfos(pServerPlugin, typeof(IStorageCollection)))
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IStorageCollection)))
                 Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IStorageCollection)), pfi);
 
-            foreach (PropertyFieldInfo pfi in Injection.GetPropertyFieldInfos(pServerPlugin, typeof(IUserStorageCollection)))
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IUserStorageCollection)))
                 Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IUserStorageCollection)), pfi);
         }
 

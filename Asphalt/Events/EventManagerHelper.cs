@@ -24,117 +24,117 @@ namespace Asphalt.Events
             {
                 // Inventory Events
                 case nameof(InventoryChangeSelectedSlotEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(SelectionInventory), typeof(InventoryChangeSelectedSlotEventHelper), "SelectIndex");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(SelectionInventory), typeof(InventoryChangeSelectedSlotEventHelper), "SelectIndex");
                     break;
                 case nameof(InventoryMoveItemEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(InventoryChangeSet), typeof(InventoryMoveItemEventHelper), "MoveStacks");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(InventoryChangeSet), typeof(InventoryMoveItemEventHelper), "MoveStacks");
                     break;
 
                 // Player Events
                 case nameof(PlayerBuyEvent):
-                    Injection.InstallCreateAtomicAction(typeof(BuyPlayerActionManager), typeof(PlayerBuyEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(BuyPlayerActionManager), typeof(PlayerBuyEventHelper));
                     break;
                 case nameof(PlayerClaimPropertyEvent):
-                    Injection.InstallCreateAtomicAction(typeof(ClaimPropertyPlayerActionManager), typeof(PlayerClaimPropertyEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(ClaimPropertyPlayerActionManager), typeof(PlayerClaimPropertyEventHelper));
                     break;
                 case nameof(PlayerCompleteContractEvent):
-                    Injection.InstallCreateAtomicAction(typeof(CompleteContractPlayerActionManager), typeof(PlayerCompleteContractEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(CompleteContractPlayerActionManager), typeof(PlayerCompleteContractEventHelper));
                     break;
                 case nameof(PlayerCraftEvent):
-                    Injection.InstallCreateAtomicAction(typeof(CraftPlayerActionManager), typeof(PlayerCraftEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(CraftPlayerActionManager), typeof(PlayerCraftEventHelper));
                     break;
                 case nameof(PlayerEatEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(Stomach), typeof(PlayerEatEventHelper), "Eat");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(Stomach), typeof(PlayerEatEventHelper), "Eat");
                     break;
                 case nameof(PlayerGainSkillEvent):
-                    Injection.InstallCreateAtomicAction(typeof(GainSkillPlayerActionManager), typeof(PlayerGainSkillEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(GainSkillPlayerActionManager), typeof(PlayerGainSkillEventHelper));
                     break;
                 case nameof(PlayerGetElectedEvent):
-                    Injection.InstallCreateAtomicAction(typeof(GetElectedPlayerActionManager), typeof(PlayerGetElectedEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(GetElectedPlayerActionManager), typeof(PlayerGetElectedEventHelper));
                     break;
                 case nameof(PlayerHarvestEvent):
-                    Injection.InstallCreateAtomicAction(typeof(HarvestPlayerActionManager), typeof(PlayerHarvestEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(HarvestPlayerActionManager), typeof(PlayerHarvestEventHelper));
                     break;
                 case nameof(PlayerInteractEvent):
-                    Injection.InstallWithOriginalHelperPublicStatic(typeof(InteractionExtensions), typeof(PlayerInteractEventHelper), "MakeContext");
+                    InjectionUtils.InstallWithOriginalHelperPublicStatic(typeof(InteractionExtensions), typeof(PlayerInteractEventHelper), "MakeContext");
                     break;
                 case nameof(PlayerLoginEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(User), typeof(PlayerLoginEventHelper), "Login");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(User), typeof(PlayerLoginEventHelper), "Login");
                     break;
                 case nameof(PlayerLogoutEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(User), typeof(PlayerLogoutEventHelper), "Logout");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(User), typeof(PlayerLogoutEventHelper), "Logout");
                     break;
                 case nameof(PlayerPayTaxEvent):
-                    Injection.InstallCreateAtomicAction(typeof(PayTaxPlayerActionManager), typeof(PlayerPayTaxEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(PayTaxPlayerActionManager), typeof(PlayerPayTaxEventHelper));
                     break;
                 case nameof(PlayerPickUpEvent):
-                    Injection.InstallCreateAtomicAction(typeof(PickUpPlayerActionManager), typeof(PlayerPickUpEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(PickUpPlayerActionManager), typeof(PlayerPickUpEventHelper));
                     break;
                 case nameof(PlayerPlaceEvent):
-                    Injection.InstallCreateAtomicAction(typeof(PlacePlayerActionManager), typeof(PlayerPlaceEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(PlacePlayerActionManager), typeof(PlayerPlaceEventHelper));
                     break;
                 case nameof(PlayerProposeVoteEvent):
-                    Injection.InstallCreateAtomicAction(typeof(ProposeVotePlayerActionManager), typeof(PlayerProposeVoteEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(ProposeVotePlayerActionManager), typeof(PlayerProposeVoteEventHelper));
                     break;
                 case nameof(PlayerReceiveGovernmentFundsEvent):
-                    Injection.InstallCreateAtomicAction(typeof(ReceiveGovernmentFundsPlayerActionManager), typeof(PlayerReceiveGovernmentFundsEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(ReceiveGovernmentFundsPlayerActionManager), typeof(PlayerReceiveGovernmentFundsEventHelper));
                     break;
                 case nameof(PlayerRunForElectionEvent):
-                    Injection.InstallCreateAtomicAction(typeof(RunForElectionPlayerActionManager), typeof(PlayerRunForElectionEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(RunForElectionPlayerActionManager), typeof(PlayerRunForElectionEventHelper));
                     break;
                 case nameof(PlayerSellEvent):
-                    Injection.InstallCreateAtomicAction(typeof(SellPlayerActionManager), typeof(PlayerSellEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(SellPlayerActionManager), typeof(PlayerSellEventHelper));
                     break;
                 case nameof(PlayerSendMessageEvent):
-                    Injection.InstallCreateAtomicAction(typeof(MessagePlayerActionManager), typeof(PlayerSendMessageEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(MessagePlayerActionManager), typeof(PlayerSendMessageEventHelper));
                     break;
                 case nameof(PlayerTeleportEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(Player), typeof(PlayerTeleportEventHelper), "SetPosition");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(Player), typeof(PlayerTeleportEventHelper), "SetPosition");
                     break;
                 case nameof(PlayerUnlearnSkillEvent):
-                    Injection.InstallCreateAtomicAction(typeof(UnlearnSkillPlayerActionManager), typeof(PlayerUnlearnSkillEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(UnlearnSkillPlayerActionManager), typeof(PlayerUnlearnSkillEventHelper));
                     break;
                 case nameof(PlayerVoteEvent):
-                    Injection.InstallCreateAtomicAction(typeof(VotePlayerActionManager), typeof(PlayerVoteEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(VotePlayerActionManager), typeof(PlayerVoteEventHelper));
                     break;
 
                 // RPC Events
                 case nameof(RpcInvokeEvent):
-                    Injection.Install(typeof(RPCManager).GetMethods(Injection.PUBLIC_STATIC).First(mi => mi.Name == "InvokeOn" && mi.GetParameters().Length == 5), typeof(RpcInvokeEventHelper));
+                    InjectionUtils.Install(typeof(RPCManager).GetMethods(InjectionUtils.PUBLIC_STATIC).First(mi => mi.Name == "InvokeOn" && mi.GetParameters().Length == 5), typeof(RpcInvokeEventHelper));
                     break;
 
                 // World Events
                 case nameof(WorldPolluteEvent):
-                    Injection.InstallCreateAtomicAction(typeof(PolluteAirPlayerActionManager), typeof(WorldPolluteEventHelper));
+                    InjectionUtils.InstallCreateAtomicAction(typeof(PolluteAirPlayerActionManager), typeof(WorldPolluteEventHelper));
                     break;
 
                 // WorldObject Events
                 case nameof(RubbleSpawnEvent):
-                    Injection.InstallWithOriginalHelperPublicStatic(typeof(EcoObjectManager), typeof(RubbleSpawnEventHelper), "Add");
+                    InjectionUtils.InstallWithOriginalHelperPublicStatic(typeof(EcoObjectManager), typeof(RubbleSpawnEventHelper), "Add");
                     break;
                 case nameof(TreeFellEvent):
-                    Injection.InstallWithOriginalHelperNonPublicInstance(typeof(TreeEntity), typeof(TreeFellEventHelper), "FellTree");
+                    InjectionUtils.InstallWithOriginalHelperNonPublicInstance(typeof(TreeEntity), typeof(TreeFellEventHelper), "FellTree");
                     break;
                 case nameof(TreeChopEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(TreeEntity), typeof(TreeChopEventHelper), "TryApplyDamage");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(TreeEntity), typeof(TreeChopEventHelper), "TryApplyDamage");
                     break;
                 case nameof(WorldObjectChangeTextEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(CustomTextComponent), typeof(WorldObjectChangeTextEventHelper), "SetText");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(CustomTextComponent), typeof(WorldObjectChangeTextEventHelper), "SetText");
                     break;
                 case nameof(WorldObjectDestroyedEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectDestroyedEventHelper), "Destroy");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectDestroyedEventHelper), "Destroy");
                     break;
                 case nameof(WorldObjectEnabledChangedEvent):
-                    Injection.InstallWithOriginalHelperNonPublicInstance(typeof(WorldObject), typeof(WorldObjectEnabledChangedEventHelper), "set_Enabled");
+                    InjectionUtils.InstallWithOriginalHelperNonPublicInstance(typeof(WorldObject), typeof(WorldObjectEnabledChangedEventHelper), "set_Enabled");
                     break;
                 case nameof(WorldObjectNameChangedEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectNameChangedEventHelper), "SetName");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectNameChangedEventHelper), "SetName");
                     break;
                 case nameof(WorldObjectOperatingChangedEvent):
-                    Injection.InstallWithOriginalHelperNonPublicInstance(typeof(WorldObject), typeof(WorldObjectOperatingChangedEventHelper), "set_Operating");
+                    InjectionUtils.InstallWithOriginalHelperNonPublicInstance(typeof(WorldObject), typeof(WorldObjectOperatingChangedEventHelper), "set_Operating");
                     break;
                 case nameof(WorldObjectPickupEvent):
-                    Injection.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectPickupEventHelper), "TryPickUp");
+                    InjectionUtils.InstallWithOriginalHelperPublicInstance(typeof(WorldObject), typeof(WorldObjectPickupEventHelper), "TryPickUp");
                     break;
             }
         }

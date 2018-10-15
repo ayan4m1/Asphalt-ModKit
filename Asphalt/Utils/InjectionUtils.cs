@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Asphalt.Utils
 {
     //You can also call this class magic ;)
-    public static class Injection
+    public static class InjectionUtils
     {
         public const BindingFlags PUBLIC_STATIC = BindingFlags.Static | BindingFlags.Public;
         public const BindingFlags PUBLIC_INSTANCE = BindingFlags.Instance | BindingFlags.Public;
