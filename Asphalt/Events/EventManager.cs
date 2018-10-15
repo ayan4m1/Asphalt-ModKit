@@ -49,7 +49,7 @@ namespace Asphalt.Events
                     {
                         try
                         {
-                            EventManagerHelper.injectEvent(parameterType);
+                            EventManagerHelper.InjectEvent(parameterType);
                         }
                         catch (Exception e)
                         {

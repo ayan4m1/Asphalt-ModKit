@@ -18,7 +18,7 @@ namespace Asphalt.Events
 {
     internal static class EventManagerHelper
     {
-        internal static void injectEvent(Type pEventType)
+        internal static void InjectEvent(Type pEventType)
         {
             switch (pEventType.Name) //We hope Event names are unique
             {
