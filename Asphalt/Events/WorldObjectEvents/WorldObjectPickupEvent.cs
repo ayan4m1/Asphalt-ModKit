@@ -7,6 +7,9 @@ using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents
 {
+    /// <summary>
+    /// Called when a player attempts to pick up a WorldObject using a hammer
+    /// </summary>
     public class WorldObjectPickupEvent : CancelEventArgs
     {
         public WorldObject WorldObject { get; set; }
