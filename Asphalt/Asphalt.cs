@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace Asphalt
 {
-    public class Asphalt : IModKitPlugin
+    public class AsphaltPlugin : IModKitPlugin
     {
         public static HarmonyInstance Harmony { get; protected set; }
 
-        static Asphalt()
+        static AsphaltPlugin()
         {
             // Patch injections for default Services onEnable etc.
             Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");

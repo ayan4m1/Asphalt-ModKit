@@ -1,4 +1,4 @@
-﻿using Asphalt.Api.Util;
+﻿using Asphalt.Utils;
 using Eco.Core.Serialization;
 using Eco.Shared.Utils;
 using System;
@@ -39,7 +39,7 @@ namespace Asphalt.Storeable.CommonFileStorage
         public virtual void Reload()
         {
             if (File.Exists(FileName))
-                this.Content = mSerializer.Deserialize(FileUtil.ReadFromFile(FileName)) ?? new Dictionary<string, object>();
+                this.Content = mSerializer.Deserialize(FileUtils.ReadFromFile(FileName)) ?? new Dictionary<string, object>();
 
             if (mSaveDefaultValues && DefaultValues != null)
             {
@@ -63,7 +63,7 @@ namespace Asphalt.Storeable.CommonFileStorage
 
         public virtual void ForceSave()
         {
-            FileUtil.WriteToFile(FileName, mSerializer.Serialize(this.Content));
+            FileUtils.WriteToFile(FileName, mSerializer.Serialize(this.Content));
         }
 
         public virtual string GetString(string key)

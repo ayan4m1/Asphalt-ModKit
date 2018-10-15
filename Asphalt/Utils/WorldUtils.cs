@@ -18,16 +18,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Asphalt.Util
+namespace Asphalt.Utils
 {
-
     //WARNING! Some methods of this file are deprecated and may be changed or deleted in a future update!
     public static class WorldUtils
     {
         /**
          * Old Methods. Deprecated?
          **/
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static PlantSpecies GetPlantSpecies(Type pBlockType)
         {

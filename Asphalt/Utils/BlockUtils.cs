@@ -3,7 +3,7 @@ using Eco.World.Blocks;
 using System;
 using System.Linq;
 
-namespace Asphalt.Util
+namespace Asphalt.Utils
 {
     public static class BlockUtils
     {

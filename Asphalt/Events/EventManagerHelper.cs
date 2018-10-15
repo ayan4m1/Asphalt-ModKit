@@ -1,4 +1,4 @@
-﻿using Asphalt.Api.Util;
+﻿using Asphalt.Utils;
 using Asphalt.Events.InventoryEvents;
 using Asphalt.Events.PlayerEvents;
 using Asphalt.Events.RpcEvents;
@@ -22,9 +22,7 @@ namespace Asphalt.Events
         {
             switch (pEventType.Name) //We hope Event names are unique
             {
-
                 // Inventory Events
-
                 case nameof(InventoryChangeSelectedSlotEvent):
                     Injection.InstallWithOriginalHelperPublicInstance(typeof(SelectionInventory), typeof(InventoryChangeSelectedSlotEventHelper), "SelectIndex");
                     break;
@@ -33,7 +31,6 @@ namespace Asphalt.Events
                     break;
 
                 // Player Events
-
                 case nameof(PlayerBuyEvent):
                     Injection.InstallCreateAtomicAction(typeof(BuyPlayerActionManager), typeof(PlayerBuyEventHelper));
                     break;
@@ -103,17 +100,15 @@ namespace Asphalt.Events
 
                 // RPC Events
                 case nameof(RpcInvokeEvent):
-                    Injection.Install(typeof(RPCManager).GetMethods(Injection.PUBLIC_STATC).First(mi => mi.Name == "InvokeOn" && mi.GetParameters().Length == 5), typeof(RpcInvokeEventHelper));
+                    Injection.Install(typeof(RPCManager).GetMethods(Injection.PUBLIC_STATIC).First(mi => mi.Name == "InvokeOn" && mi.GetParameters().Length == 5), typeof(RpcInvokeEventHelper));
                     break;
 
                 // World Events
-
                 case nameof(WorldPolluteEvent):
                     Injection.InstallCreateAtomicAction(typeof(PolluteAirPlayerActionManager), typeof(WorldPolluteEventHelper));
                     break;
 
                 // WorldObject Events
-
                 case nameof(RubbleSpawnEvent):
                     Injection.InstallWithOriginalHelperPublicStatic(typeof(EcoObjectManager), typeof(RubbleSpawnEventHelper), "Add");
                     break;
@@ -123,7 +118,6 @@ namespace Asphalt.Events
                 case nameof(TreeChopEvent):
                     Injection.InstallWithOriginalHelperPublicInstance(typeof(TreeEntity), typeof(TreeChopEventHelper), "TryApplyDamage");
                     break;
-
                 case nameof(WorldObjectChangeTextEvent):
                     Injection.InstallWithOriginalHelperPublicInstance(typeof(CustomTextComponent), typeof(WorldObjectChangeTextEventHelper), "SetText");
                     break;

@@ -114,18 +114,17 @@
     <Compile Include="Storeable\StorageFactory.cs" />
     <Compile Include="Storeable\Yaml\YamlFileStorageSerializer.cs" />
     <Compile Include="Storeable\Yaml\YamlSerializationHelper.cs" />
-    <Compile Include="Util\AffineTransform.cs" />
+    <Compile Include="Utils\AffineTransform.cs" />
     <Compile Include="Service\ServiceHelper.cs" />
-    <Compile Include="Util\BlockUtils.cs" />
-    <Compile Include="Util\DirectionUtils.cs" />
-    <Compile Include="Util\FileUtil.cs" />
+    <Compile Include="Utils\BlockUtils.cs" />
+    <Compile Include="Utils\DirectionUtils.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Injection.cs" />
-    <Compile Include="Util\InvUtils.cs" />
-    <Compile Include="Util\ReflectionUtil.cs" />
-    <Compile Include="Util\RubbleUtils.cs" />
-    <Compile Include="Util\SkillsUtil.cs" />
-    <Compile Include="Util\WorldUtils.cs" />
+    <Compile Include="Utils\Injection.cs" />
+    <Compile Include="Utils\InvUtils.cs" />
+    <Compile Include="Utils\RubbleUtils.cs" />
+    <Compile Include="Utils\SkillUtils.cs" />
+    <Compile Include="Utils\WorldUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EcoServer">

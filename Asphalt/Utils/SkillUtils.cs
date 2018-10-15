@@ -9,9 +9,9 @@ using Eco.Gameplay.Skills;
 using System;
 using System.Linq;
 
-namespace Asphalt.Util
+namespace Asphalt.Utils
 {
-    public static class SkillsUtil
+    public static class SkillUtils
     {
         /// <summary>
         /// Return true if the user has the level of the skillm return false if the user don't have the skill

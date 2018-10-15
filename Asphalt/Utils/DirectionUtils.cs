@@ -1,7 +1,7 @@
 ﻿using Eco.Gameplay.Players;
 using Eco.Shared.Math;
 
-namespace Asphalt.Util
+namespace Asphalt.Utils
 {
     public static class DirectionUtils
     {

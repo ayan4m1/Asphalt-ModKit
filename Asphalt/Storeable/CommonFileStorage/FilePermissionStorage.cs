@@ -1,4 +1,4 @@
-﻿using Asphalt.Api.Util;
+﻿using Asphalt.Utils;
 using Asphalt.Service.Permissions;
 using Eco.Gameplay.Players;
 using System;
@@ -17,7 +17,7 @@ namespace Asphalt.Storeable.CommonFileStorage
         {
             this.Content.Clear();
 
-            Dictionary<string, object> tmpContent = mSerializer.Deserialize(FileUtil.ReadFromFile(FileName)) ?? new Dictionary<string, object>();
+            Dictionary<string, object> tmpContent = mSerializer.Deserialize(FileUtils.ReadFromFile(FileName)) ?? new Dictionary<string, object>();
 
             //cast string values from file to PermissionGroup enum
             foreach (KeyValuePair<string, object> pair in tmpContent)
@@ -44,7 +44,7 @@ namespace Asphalt.Storeable.CommonFileStorage
 
         public override void ForceSave()
         {
-            FileUtil.WriteToFile(FileName, mSerializer.Serialize(this.Content.ToDictionary(k => k.Key, v => (object)v.Value.ToString())));
+            FileUtils.WriteToFile(FileName, mSerializer.Serialize(this.Content.ToDictionary(k => k.Key, v => (object)v.Value.ToString())));
         }
 
         public bool CheckPermission(User user, string permission)

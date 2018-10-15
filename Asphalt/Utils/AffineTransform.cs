@@ -3,7 +3,7 @@ using Eco.Shared.Math;
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Asphalt.Util
+namespace Asphalt.Utils
 {
 
     /**

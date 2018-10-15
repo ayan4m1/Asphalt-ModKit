@@ -9,9 +9,9 @@
 
 using System.IO;
 
-namespace Asphalt.Api.Util
+namespace Asphalt.Utils
 {
-    public static class FileUtil
+    public static class FileUtils
     {
         public static readonly string MODS_DIR = "Mods";
 

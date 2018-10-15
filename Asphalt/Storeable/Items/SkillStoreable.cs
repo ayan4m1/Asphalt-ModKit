@@ -1,4 +1,4 @@
-﻿using Asphalt.Util;
+﻿using Asphalt.Utils;
 
 namespace Asphalt.Storeable.Items
 {
@@ -20,7 +20,7 @@ namespace Asphalt.Storeable.Items
             T[] result = new T[Levels.Length + 1];
             for (int i = 0; i < Levels.Length; i++)
             {
-                result[i] = ReflectionUtil.GetPropertyFieldValue<T>(Levels[i], pfName);
+                result[i] = Injection.GetPropertyFieldValue<T>(Levels[i], pfName);
             }
             return result;
         }
