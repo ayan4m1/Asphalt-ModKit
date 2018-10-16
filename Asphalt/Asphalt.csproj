@@ -38,7 +38,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asphalt.cs" />
+    <Compile Include="AsphaltPlugin.cs" />
     <Compile Include="AsphaltPluginAttribute.cs" />
     <Compile Include="Chat\PageableList\IPageableList.cs" />
     <Compile Include="Chat\PageableList\PageableList.cs" />

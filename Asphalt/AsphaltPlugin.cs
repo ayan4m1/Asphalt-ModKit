@@ -17,7 +17,7 @@ namespace Asphalt
 
             if (File.Exists("dumpdlls.txt"))
             {
-                DllDumper.DumpDlls();
+                DllDumper.Dump();
             }
         }
 
