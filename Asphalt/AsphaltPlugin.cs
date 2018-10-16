@@ -1,4 +1,5 @@
-﻿using Eco.Core.Plugins.Interfaces;
+﻿using Asphalt.Utils;
+using Eco.Core.Plugins.Interfaces;
 using Harmony;
 using System.IO;
 using System.Reflection;
@@ -17,7 +18,7 @@ namespace Asphalt
 
             if (File.Exists("dumpdlls.txt"))
             {
-                DllDumper.Dump();
+                DllDumpUtils.Dump();
             }
         }
 

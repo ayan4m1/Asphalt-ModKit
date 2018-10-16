@@ -2,10 +2,12 @@
 using System.IO.Compression;
 using System.Reflection;
 
-namespace Asphalt
+namespace Asphalt.Utils
 {
-    public static class DllDumper
+    public static class DllDumpUtils
     {
+        private static readonly string modDll = "Eco.Mods.dll";
+        private static readonly string serverExe = "EcoServer.exe";
         private static readonly string[] assemblies = new[]
         {
             "Eco.Core.dll",
@@ -41,11 +43,11 @@ namespace Asphalt
                     deflateStream.CopyTo(destination);
             }
 
-            File.Delete(Path.Combine(destDir, "Eco.Mods.dll"));
-            File.Copy(Path.Combine(Path.GetTempPath(), "Eco.Mods.dll"), Path.Combine(destDir, "Eco.Mods.dll"));
+            File.Delete(Path.Combine(destDir, modDll));
+            File.Copy(Path.Combine(Path.GetTempPath(), modDll), Path.Combine(destDir, modDll));
 
-            File.Delete(Path.Combine(destDir, "EcoServer.exe"));
-            File.Copy(serverAssembly.Location, Path.Combine(destDir, "EcoServer.exe"));
+            File.Delete(Path.Combine(destDir, serverExe));
+            File.Copy(serverAssembly.Location, Path.Combine(destDir, serverExe));
         }
     }
 }
