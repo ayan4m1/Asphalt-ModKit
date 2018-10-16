@@ -6,7 +6,7 @@ namespace Asphalt
 {
     public static class DllDumper
     {
-        private static string[] assemblies = new[]
+        private static readonly string[] assemblies = new[]
         {
             "Eco.Core.dll",
             "Eco.Gameplay.dll",
@@ -18,11 +18,14 @@ namespace Asphalt
             "LiteDB.dll"
         };
 
-        public static void DumpDlls()
+        public static void Dump()
         {
-            var entryAssembly = Assembly.GetEntryAssembly();
+            Dump(Assembly.GetEntryAssembly());
+        }
 
-            var destDir = Path.Combine(Path.GetDirectoryName(entryAssembly.Location), "extracted");
+        public static void Dump(Assembly serverAssembly)
+        {
+            var destDir = Path.Combine(Path.GetDirectoryName(serverAssembly.Location), "extracted");
             Directory.CreateDirectory(destDir);
 
             foreach (var assembly in assemblies)
@@ -32,7 +35,7 @@ namespace Asphalt
 
                 File.Delete(destFileName);
 
-                using (Stream stream = entryAssembly.GetManifestResourceStream(asmname))
+                using (Stream stream = serverAssembly.GetManifestResourceStream(asmname))
                 using (DeflateStream deflateStream = new DeflateStream(stream, CompressionMode.Decompress))
                 using (FileStream destination = File.OpenWrite(destFileName))
                     deflateStream.CopyTo(destination);
@@ -42,7 +45,7 @@ namespace Asphalt
             File.Copy(Path.Combine(Path.GetTempPath(), "Eco.Mods.dll"), Path.Combine(destDir, "Eco.Mods.dll"));
 
             File.Delete(Path.Combine(destDir, "EcoServer.exe"));
-            File.Copy(entryAssembly.Location, Path.Combine(destDir, "EcoServer.exe"));
+            File.Copy(serverAssembly.Location, Path.Combine(destDir, "EcoServer.exe"));
         }
     }
 }
