@@ -21,26 +21,17 @@ namespace Asphalt.Utils
 
         public static void InstallWithOriginalHelperPublicStatic(Type pTypeToReplace, Type pHelperType, string pMethodName)
         {
-            Install(
-                    pTypeToReplace.GetMethod(pMethodName, PUBLIC_STATIC),
-                    pHelperType
-                 );
+            Install(pTypeToReplace.GetMethod(pMethodName, PUBLIC_STATIC), pHelperType);
         }
 
         public static void InstallWithOriginalHelperPublicInstance(Type pTypeToReplace, Type pHelperType, string pMethodName)
         {
-            Install(
-                    pTypeToReplace.GetMethod(pMethodName, PUBLIC_INSTANCE),
-                    pHelperType
-                 );
+            Install(pTypeToReplace.GetMethod(pMethodName, PUBLIC_INSTANCE), pHelperType);
         }
 
         public static void InstallWithOriginalHelperNonPublicInstance(Type pTypeToReplace, Type pHelperType, string pMethodName)
         {
-            Install(
-                    pTypeToReplace.GetMethod(pMethodName, NON_PUBLIC_INSTANCE),
-                    pHelperType
-                 );
+            Install(pTypeToReplace.GetMethod(pMethodName, NON_PUBLIC_INSTANCE), pHelperType);
         }
 
         public static void Install(MethodInfo pMethodToReplace, Type pHelperType)
@@ -50,14 +41,9 @@ namespace Asphalt.Utils
 
             AsphaltPlugin.Harmony.Patch(
                 pMethodToReplace,
-                new HarmonyMethod(FindMethod(pHelperType, "Prefix")),
-                new HarmonyMethod(FindMethod(pHelperType, "Postfix"))
+                new HarmonyMethod(pHelperType.GetMethod("Prefix", PUBLIC_STATIC)),
+                new HarmonyMethod(pHelperType.GetMethod("Postfix", PUBLIC_STATIC))
             );
-        }
-
-        public static MethodInfo FindMethod(Type pType, string pName)
-        {
-            return pType.GetMethod(pName, NON_PUBLIC_INSTANCE) ?? pType.GetMethod(pName, PUBLIC_INSTANCE) ?? pType.GetMethod(pName, PUBLIC_STATIC);
         }
 
         public static IEnumerable<PropertyFieldInfo> GetPropertyFieldInfos(Type pServerPlugin, Type pType)
