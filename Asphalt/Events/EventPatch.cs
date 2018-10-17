@@ -1,40 +1,38 @@
-﻿using Harmony;
+﻿using Asphalt.Utils;
+using Harmony;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asphalt.Events
 {
-    public class EventPatch<T> where T : EventArgs
+    public class EventPatch
     {
-        public T Event;
         public bool Patched { get; private set; }
-        public MethodBase PatchMethod;
-        public MethodInfo Prefix;
-        public MethodInfo Postfix;
+        private readonly MethodBase patchSite;
+        private readonly HarmonyMethod prefix;
+        private readonly HarmonyMethod postfix;
 
-        public EventPatch(MethodBase patchMethod, MethodInfo prefix, MethodInfo postfix)
+        public EventPatch(Type patchType, string methodName, BindingFlags methodType, Type helper) : this(patchType.GetMethod(methodName, methodType), helper) { }
+        public EventPatch(MethodBase patchSite, Type helper)
         {
             Patched = false;
-            PatchMethod = patchMethod;
-            Prefix = prefix;
-            Postfix = postfix;
+            this.patchSite = patchSite;
+            prefix = new HarmonyMethod(helper.GetMethod("Prefix", InjectionUtils.PUBLIC_STATIC));
+            postfix = new HarmonyMethod(helper.GetMethod("Postfix", InjectionUtils.PUBLIC_STATIC));
         }
 
         public void Patch()
         {
             if (Patched) return;
-
-            AsphaltPlugin.Harmony.Patch(
-                PatchMethod,
-                new HarmonyMethod(Prefix),
-                new HarmonyMethod(Postfix)
-            );
-
+            AsphaltPlugin.Harmony.Patch(patchSite, prefix, postfix);
             Patched = true;
+        }
+
+        public void Unpatch()
+        {
+            if (!Patched) return;
+            AsphaltPlugin.Harmony.Unpatch(patchSite, HarmonyPatchType.All);
+            Patched = false;
         }
     }
 }
