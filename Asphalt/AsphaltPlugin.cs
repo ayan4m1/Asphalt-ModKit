@@ -14,7 +14,7 @@ namespace Asphalt
         {
             // Patch injections for default Services onEnable etc.
             Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
-            Harmony.PatchAll(Assembly.GetExecutingAssembly());
+            Harmony.PatchAll();
 
             if (File.Exists("dumpdlls.txt"))
             {
