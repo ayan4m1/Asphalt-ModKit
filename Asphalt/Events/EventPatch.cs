@@ -5,30 +5,27 @@ using System.Reflection;
 
 namespace Asphalt.Events
 {
-    public class EventPatch
+    public class EventPatch // <E> where E : EventArgs
     {
         public bool Patched { get; private set; }
-        private readonly MethodBase patchSite;
-        private readonly HarmonyMethod prefix;
-        private readonly HarmonyMethod postfix;
+        public HarmonyMethod Prefix { get; private set; }
+        public HarmonyMethod Postfix { get; private set; }
 
-        public EventPatch(Type patchType, string methodName, BindingFlags methodType, Type helper) : this(patchType.GetMethod(methodName, methodType), helper) { }
-        public EventPatch(MethodBase patchSite, Type helper)
+        public EventPatch(Type patchClass)
         {
             Patched = false;
-            this.patchSite = patchSite;
-            prefix = new HarmonyMethod(helper.GetMethod("Prefix", InjectionUtils.PUBLIC_STATIC));
-            postfix = new HarmonyMethod(helper.GetMethod("Postfix", InjectionUtils.PUBLIC_STATIC));
+            Prefix = new HarmonyMethod(patchClass.GetMethod("Prefix", InjectionUtils.PUBLIC_STATIC));
+            Postfix = new HarmonyMethod(patchClass.GetMethod("Postfix", InjectionUtils.PUBLIC_STATIC));
         }
 
-        public void Patch()
+        public void Patch(MethodBase patchSite)
         {
             if (Patched) return;
-            AsphaltPlugin.Harmony.Patch(patchSite, prefix, postfix);
+            AsphaltPlugin.Harmony.Patch(patchSite, Prefix, Postfix);
             Patched = true;
         }
 
-        public void Unpatch()
+        public void Unpatch(MethodBase patchSite)
         {
             if (!Patched) return;
             AsphaltPlugin.Harmony.Unpatch(patchSite, HarmonyPatchType.All);

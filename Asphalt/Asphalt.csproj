@@ -42,11 +42,12 @@
     <Compile Include="AsphaltPluginAttribute.cs" />
     <Compile Include="Chat\PageableList\IPageableList.cs" />
     <Compile Include="Chat\PageableList\PageableList.cs" />
+    <Compile Include="Events\EventEmitter.cs" />
     <Compile Include="Events\EventHandlerRegistry.cs" />
+    <Compile Include="Events\PatchRegistry.cs" />
     <Compile Include="Utils\DllDumpUtils.cs" />
     <Compile Include="Events\EventHandlerComparer.cs" />
     <Compile Include="Events\EventPatch.cs" />
-    <Compile Include="Events\PatchSite.cs" />
     <Compile Include="Events\WorldObjectEvents\TreeChopEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\TreeFellEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\RubbleSpawnEvent.cs" />
