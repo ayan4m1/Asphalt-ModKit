@@ -1,6 +1,8 @@
 ﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using Harmony;
 using System;
+using System.Reflection;
 
 namespace Asphalt.Events.InventoryEvents
 {
@@ -22,15 +24,13 @@ namespace Asphalt.Events.InventoryEvents
             Inventory = inv;
         }
     }
-
-    internal class InventoryChangeSelectedSlotEventHelper
+    
+    [EventPatchSite(typeof(SelectionInventory), "SelectIndex")]
+    internal class InventoryChangeSelectedSlotEventEmitter : EventEmitter<InventoryChangeSelectedSlotEvent>
     {
         public static void Prefix(Player player, int slot, SelectionInventory __instance)
         {
-            InventoryChangeSelectedSlotEvent csse = new InventoryChangeSelectedSlotEvent(slot, player, __instance.SelectedStack, __instance);
-            EventArgs csseEvent = csse;
-
-            EventManager.CallEvent(ref csseEvent);
+            Emit(new InventoryChangeSelectedSlotEvent(slot, player, __instance.SelectedStack, __instance));
         }
     }
 }
