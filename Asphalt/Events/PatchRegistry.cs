@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asphalt.Events
 {
@@ -11,10 +9,31 @@ namespace Asphalt.Events
     {
         private static readonly Type emitterType = typeof(EventEmitter<>);
         private static readonly Dictionary<Type, EventPatch> patches = new Dictionary<Type, EventPatch>();
+        private static readonly Dictionary<Type, List<EventHandlerData>> handlers = new Dictionary<Type, List<EventHandlerData>>();
 
-        public void Register()
+        public static void RegisterHandler(Type eventType, EventPatch patch)
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            if (!patches.ContainsKey(eventType))
+            {
+                throw new ArgumentOutOfRangeException("eventType", "Event type has no patches registered!");
+            }
+
+            if (handlers.ContainsKey(eventType))
+            {
+                handlers.Add(eventType, new List<EventHandlerData>());
+            }
+
+            handlers[eventType].Add();
+        }
+
+        public void RegisterPatch(Type type)
+        {
+            var patch = EventPatch.FromType(type);
+            patches.Add(type, patch);
+        }
+
+        public void RegisterPatches(Assembly assembly)
+        {
             var types = assembly.GetTypes();
             foreach (var type in types)
             {
@@ -24,9 +43,13 @@ namespace Asphalt.Events
                     continue;
                 }
 
-                var patch = new EventPatch(type);
-                patches.Add(type, patch);
+                RegisterPatch(type);
             }
+        }
+
+        public void RegisterPatches()
+        {
+            RegisterPatches(Assembly.GetCallingAssembly());
         }
 
         private static bool IsEventEmitter(Type type)

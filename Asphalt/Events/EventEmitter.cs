@@ -5,7 +5,7 @@ namespace Asphalt.Events
 {
     public abstract class EventEmitter<E> where E : EventArgs
     {
-        public abstract MethodBase PatchSite { get; }
+        public static MethodBase PatchSite { get; }
 
         protected static void Emit(E rawEvent)
         {
