@@ -2,9 +2,9 @@
 
 namespace Asphalt.Events
 {
-    internal class EventHandlerComparer : IComparer<EventHandlerData>
+    public class EventPriorityComparer : IComparer<EventBinding>
     {
-        public int Compare(EventHandlerData x, EventHandlerData y)
+        public int Compare(EventBinding x, EventBinding y)
         {
             return x.Priority.CompareTo(y.Priority);
         }

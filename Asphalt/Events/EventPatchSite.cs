@@ -21,6 +21,10 @@ namespace Asphalt.Events
         public EventPatchSite(Type type, string methodName)
         {
             PatchSite = HuntForMethod(type, methodName);
+            if (PatchSite == null)
+            {
+                throw new ArgumentException($"Could not find PatchSite for {type.FullName}.{methodName}");
+            }
         }
 
         public EventPatchSite(Type type, string methodName, BindingFlags flags)
