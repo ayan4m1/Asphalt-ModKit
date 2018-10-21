@@ -44,7 +44,9 @@ namespace Asphalt.Events
         public void Unpatch()
         {
             if (!Patched) return;
-            AsphaltPlugin.Harmony.Unpatch(PatchSite, HarmonyPatchType.All);
+            // using .Unpatch(PatchSite, HarmonyPatchType.All) does not work
+            AsphaltPlugin.Harmony.Unpatch(PatchSite, Prefix?.method);
+            AsphaltPlugin.Harmony.Unpatch(PatchSite, Postfix?.method);
             Patched = false;
         }
     }

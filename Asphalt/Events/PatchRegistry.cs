@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -7,9 +8,28 @@ namespace Asphalt.Events
 {
     public static class PatchRegistry
     {
-        private static readonly Type emitterType = typeof(EventEmitter<>);
         private static readonly Dictionary<Type, EventPatch> patches = new Dictionary<Type, EventPatch>();
         private static readonly Dictionary<Type, List<EventBinding>> handlers = new Dictionary<Type, List<EventBinding>>();
+
+        public static void HandleEvent<E>(ref E rawEvent) where E : EventArgs {
+            var eventType = rawEvent.GetType();
+            if (!patches.ContainsKey(eventType) || !handlers.ContainsKey(eventType))
+            {
+                return;
+            }
+
+            var bindings = handlers[eventType];
+            var cancellable = rawEvent as CancelEventArgs;
+            foreach (var binding in bindings)
+            {
+                if (cancellable != null && cancellable.Cancel && binding.AllowCancel)
+                {
+                    continue;
+                }
+
+                binding.Handler.Invoke(binding.HandlerType, new object[] { rawEvent });
+            }
+        }
 
         public static void RegisterHandler(Type eventType, EventBinding handler)
         {
@@ -50,6 +70,7 @@ namespace Asphalt.Events
             }
 
             var patch = EventPatch.FromType(patchType);
+            patch.Patch();
             patches.Add(patchType, patch);
             return patch;
         }
@@ -58,7 +79,7 @@ namespace Asphalt.Events
         {
             foreach (var type in assembly
                 .GetTypes()
-                .Where(IsEventEmitter)
+                .Where(EventExtensions.IsEventEmitter)
                 .Where(type => !patches.ContainsKey(type)))
             {
                 RegisterPatch(type);
@@ -90,7 +111,7 @@ namespace Asphalt.Events
         {
             foreach (var type in assembly
                 .GetTypes()
-                .Where(IsEventEmitter)
+                .Where(EventExtensions.IsEventEmitter)
                 .Where(type => patches.ContainsKey(type)))
             {
                 UnregisterPatch(type);
@@ -115,35 +136,6 @@ namespace Asphalt.Events
                 handler.Clear();
             }
             handlers.Clear();
-        }
-
-        private static bool HasEventPatchSiteAttribute(Type type)
-        {
-            return type.GetCustomAttribute<EventPatchSite>() != null;
-        }
-
-        private static bool IsEventEmitter(Type type)
-        {
-            if (type.BaseType == null)
-            {
-                return false;
-            }
-
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == emitterType)
-            {
-                return true;
-            }
-
-            var interfaces = type
-                .GetInterfaces()
-                .Where(t => t.IsGenericType && t.GetGenericTypeDefinition() == emitterType);
-
-            if (interfaces.Count() > 0)
-            {
-                return true;
-            }
-
-            return IsEventEmitter(type.BaseType);
         }
     }
 }

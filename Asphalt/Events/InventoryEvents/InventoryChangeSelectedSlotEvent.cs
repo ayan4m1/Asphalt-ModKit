@@ -1,8 +1,6 @@
 ﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
-using Harmony;
 using System;
-using System.Reflection;
 
 namespace Asphalt.Events.InventoryEvents
 {

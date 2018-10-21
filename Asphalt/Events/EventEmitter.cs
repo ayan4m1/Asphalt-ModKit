@@ -5,12 +5,14 @@ namespace Asphalt.Events
 {
     public abstract class EventEmitter<E> where E : EventArgs
     {
-        public static MethodBase PatchSite { get; }
-
         protected static void Emit(E rawEvent)
         {
-            var e = rawEvent as EventArgs;
-            EventManager.CallEvent(ref e);
+            PatchRegistry.HandleEvent(ref rawEvent);
+        }
+
+        protected static void Emit(ref E rawEvent)
+        {
+            PatchRegistry.HandleEvent(ref rawEvent);
         }
     }
 }

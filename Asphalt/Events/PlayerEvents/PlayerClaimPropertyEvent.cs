@@ -1,5 +1,6 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using Eco.Shared.Math;
 using System;
@@ -26,22 +27,20 @@ namespace Asphalt.Events.PlayerEvents
         }
     }
 
-    internal class PlayerClaimPropertyEventHelper
+    [AtomicActionEventPatchSite(typeof(ClaimPropertyPlayerActionManager))]
+    internal class PlayerClaimPropertyEventEmitter : EventEmitter<PlayerClaimPropertyEvent>
     {
         public static bool Prefix(ref Guid authId, ref User user, ref Vector2i position, ref IAtomicAction __result)
         {
-            PlayerClaimPropertyEvent cEvent = new PlayerClaimPropertyEvent(ref authId, ref user, ref position);
-            EventArgs EventArgs = cEvent;
+            var evt = new PlayerClaimPropertyEvent(ref authId, ref user, ref position);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref EventArgs);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to claim property!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

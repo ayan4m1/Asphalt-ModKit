@@ -2,6 +2,7 @@
 using Eco.Gameplay.Components;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using System;
 using System.ComponentModel;
@@ -14,35 +15,31 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerCraftEvent : CancelEventArgs
     {
         public User User { get; set; }
-
         public CraftingComponent Table { get; set; }
-
         public Item Item { get; set; }
 
-        public PlayerCraftEvent(ref User pUser, ref CraftingComponent pTable, ref Item pItem) : base()
+        public PlayerCraftEvent(ref User pUser, ref CraftingComponent pTable, ref Item pItem)
         {
-            this.User = pUser;
-            this.Table = pTable;
-            this.Item = pItem;
+            User = pUser;
+            Table = pTable;
+            Item = pItem;
         }
     }
 
-    internal class PlayerCraftEventHelper
+    [AtomicActionEventPatchSite(typeof(CraftPlayerActionManager))]
+    internal class PlayerCraftEventEmitter : EventEmitter<PlayerCraftEvent>
     {
         public static bool Prefix(ref User user, ref CraftingComponent table, ref Item item, ref IAtomicAction __result)
         {
-            PlayerCraftEvent cEvent = new PlayerCraftEvent(ref user, ref table, ref item);
-            EventArgs args = cEvent;
+            var evt = new PlayerCraftEvent(ref user, ref table, ref item);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString());
-                return false;
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

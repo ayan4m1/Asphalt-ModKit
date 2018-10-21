@@ -2,7 +2,6 @@
 using Eco.Core.Plugins.Interfaces;
 using Harmony;
 using System.IO;
-using System.Reflection;
 
 namespace Asphalt
 {

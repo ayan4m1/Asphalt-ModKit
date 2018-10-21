@@ -22,19 +22,14 @@ namespace Asphalt.Events.InventoryEvents
         }
     }
 
-    internal class InventoryMoveItemEventHelper
+    [EventPatchSite(typeof(InventoryChangeSet), "MoveStacks")]
+    internal class InventoryMoveItemEventEmitter : EventEmitter<InventoryMoveItemEvent>
     {
         public static bool Prefix(ItemStack source, ItemStack destination, User user)
         {
-            InventoryMoveItemEvent imie = new InventoryMoveItemEvent(source, destination, user);
-            EventArgs imieEvent = imie;
-
-            EventManager.CallEvent(ref imieEvent);
-
-            if (imie.Cancel)
-                return false;
-
-            return true;
+            var evt = new InventoryMoveItemEvent(source, destination, user);
+            Emit(ref evt);
+            return !evt.Cancel;
         }
     }
 }

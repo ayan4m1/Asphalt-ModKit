@@ -1,5 +1,6 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using System;
 using System.ComponentModel;
@@ -10,28 +11,26 @@ namespace Asphalt.Events.PlayerEvents
     {
         public Player Player { get; set; }
 
-        public PlayerCompleteContractEvent(ref Player pPlayer) : base()
+        public PlayerCompleteContractEvent(ref Player pPlayer)
         {
-            this.Player = pPlayer;
+            Player = pPlayer;
         }
     }
 
-    internal class PlayerCompleteContractEventHelper
+    [AtomicActionEventPatchSite(typeof(CompleteContractPlayerActionManager))]
+    internal class PlayerCompleteContractEventEmitter : EventEmitter<PlayerCompleteContractEvent>
     {
         public static bool Prefix(ref Player player, ref IAtomicAction __result)
         {
-            PlayerCompleteContractEvent cEvent = new PlayerCompleteContractEvent(ref player);
-            EventArgs args = cEvent;
+            var evt = new PlayerCompleteContractEvent(ref player);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to complete contract!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

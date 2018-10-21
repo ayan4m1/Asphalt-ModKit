@@ -10,7 +10,9 @@ namespace Asphalt.Events
         GetField = BindingFlags.Public | BindingFlags.GetField,
         GetProperty = BindingFlags.Public | BindingFlags.GetProperty,
         SetField = BindingFlags.Public | BindingFlags.SetField,
-        SetProperty = BindingFlags.Public | BindingFlags.SetProperty
+        SetProperty = BindingFlags.Public | BindingFlags.SetProperty,
+        PrivateStatic = BindingFlags.NonPublic | BindingFlags.Static,
+        PrivateInstance = BindingFlags.NonPublic | BindingFlags.Instance
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
