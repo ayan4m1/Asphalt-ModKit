@@ -45,7 +45,6 @@
     <Compile Include="Events\AtomicActionEventPatchSite.cs" />
     <Compile Include="Events\EventEmitter.cs" />
     <Compile Include="Events\EventExtensions.cs" />
-    <Compile Include="Events\EventHandlerQueue.cs" />
     <Compile Include="Events\EventPatchSite.cs" />
     <Compile Include="Events\EventPriorityComparer.cs" />
     <Compile Include="Events\PatchRegistry.cs" />
