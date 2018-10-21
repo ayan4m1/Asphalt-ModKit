@@ -3,7 +3,6 @@ using Asphalt.Service;
 using Asphalt.Storeable;
 using Asphalt;
 using Asphalt.Service.Permissions;
-using System;
 
 namespace AsphaltFindEasterEggsPlugin
 {
