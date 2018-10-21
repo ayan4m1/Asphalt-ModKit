@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>AsphaltModKit</id>
+    <id>Asphalt</id>
     <version>$version$</version>
     <authors>Eco Mods Developers</authors>
     <owners>Eco Mods Developers</owners>
@@ -18,7 +18,7 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="bin\x64\Release\AsphaltModKit.dll" target="lib\net471" />
-     <file src="bin\x64\Release\AsphaltModKit.pdb" target="lib\net471" />
+     <file src="bin\x64\Release\Asphalt.dll" target="lib\net472" />
+     <file src="bin\x64\Release\Asphalt.pdb" target="lib\net472" />
    </files>
 </package>
