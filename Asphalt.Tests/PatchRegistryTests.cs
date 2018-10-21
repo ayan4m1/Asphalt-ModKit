@@ -3,13 +3,8 @@ using Eco.Gameplay.Economy;
 using Eco.Gameplay.Items;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AsphaltTests
+namespace Asphalt.Tests
 {
     [TestFixture]
     public class PatchRegistryTests
@@ -65,19 +60,13 @@ namespace AsphaltTests
     [EventPatchSite(typeof(SelectionInventory), "SelectIndex")]
     internal class PatchRegistryTestOne
     {
-        public static void Prefix(SelectionInventory __instance)
-        {
-            Console.WriteLine(__instance.ToString());
-        }
+        public static void Prefix() { }
     }
 
     [EventPatchSite(typeof(EconomyManager), "OnCreate")]
     internal class PatchRegistryTestTwo
     {
-        public static void Prefix(EconomyManager __instance)
-        {
-            Console.WriteLine(__instance.ToString());
-        }
+        public static void Prefix() { }
     }
 
     internal class PatchRegistryTestWithoutPatchSite { }

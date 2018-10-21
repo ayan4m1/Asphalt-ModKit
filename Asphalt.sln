@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltEventTestPlugin", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltFindEasterEggsPlugin", "AsphaltFindEasterEggsPlugin\AsphaltFindEasterEggsPlugin.csproj", "{00EBBCD0-91EF-4D3A-A8F1-FEEAFF404DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsphaltTests", "AsphaltTests\AsphaltTests.csproj", "{A657DE5F-7086-4ECE-978E-8160213D461D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asphalt.Tests", "Asphalt.Tests\Asphalt.Tests.csproj", "{A657DE5F-7086-4ECE-978E-8160213D461D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

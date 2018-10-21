@@ -6,7 +6,7 @@ namespace Asphalt.Tests
     public class PluginTests
     {
         [Test]
-        public void PluginIsSane()
+        public void CanInitialize()
         {
             var plugin = new AsphaltPlugin();
             Assert.IsNotNull(plugin);
