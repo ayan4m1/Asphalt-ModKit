@@ -19,6 +19,8 @@ namespace Asphalt.Events
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class EventPatchSite : Attribute
     {
+        private static readonly List<FieldInfo> bindingFlags = typeof(CommonBindingFlags).GetFields(CommonBindingFlags.Static).ToList();
+
         public MethodBase PatchSite { get; private set; }
 
         /// <summary>
@@ -75,9 +77,10 @@ namespace Asphalt.Events
         /// <returns>MethodBase of the found method, or null if none found</returns>
         private static MethodBase HuntForMethod(Type type, string methodName)
         {
-            foreach (var rawFlag in Enum.GetValues(typeof(CommonBindingFlags)))
+            foreach (var rawFlag in bindingFlags)
             {
-                var flag = (BindingFlags)rawFlag;
+                // no need to pass a "this" as const fields are effectively static
+                var flag = (BindingFlags)rawFlag.GetValue(null);
                 var method = type.GetMethod(methodName, flag);
                 if (method != null)
                 {
