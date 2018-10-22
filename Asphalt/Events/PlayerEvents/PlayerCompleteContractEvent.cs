@@ -11,9 +11,9 @@ namespace Asphalt.Events.PlayerEvents
     {
         public Player Player { get; set; }
 
-        public PlayerCompleteContractEvent(ref Player pPlayer)
+        public PlayerCompleteContractEvent(ref Player player)
         {
-            Player = pPlayer;
+            Player = player;
         }
     }
 

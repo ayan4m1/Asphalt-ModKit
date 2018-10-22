@@ -18,11 +18,11 @@ namespace Asphalt.Events.PlayerEvents
         public CraftingComponent Table { get; set; }
         public Item Item { get; set; }
 
-        public PlayerCraftEvent(ref User pUser, ref CraftingComponent pTable, ref Item pItem)
+        public PlayerCraftEvent(ref User user, ref CraftingComponent table, ref Item item)
         {
-            User = pUser;
-            Table = pTable;
-            Item = pItem;
+            User = user;
+            Table = table;
+            Item = item;
         }
     }
 

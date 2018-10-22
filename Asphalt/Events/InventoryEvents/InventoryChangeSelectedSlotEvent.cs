@@ -14,12 +14,12 @@ namespace Asphalt.Events.InventoryEvents
         public ItemStack SelectedStack { get; protected set; }
         public SelectionInventory Inventory { get; protected set; }
 
-        public InventoryChangeSelectedSlotEvent(int slot, Player player, ItemStack itemStack, SelectionInventory inv)
+        public InventoryChangeSelectedSlotEvent(int slot, Player player, ItemStack itemStack, SelectionInventory inventory)
         {
             SelectedSlot = slot;
             Player = player;
             SelectedStack = itemStack;
-            Inventory = inv;
+            Inventory = inventory;
         }
     }
     

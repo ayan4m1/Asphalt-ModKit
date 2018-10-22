@@ -3,16 +3,16 @@ using System.Reflection;
 
 namespace Asphalt.Events
 {
-    internal enum CommonBindingFlags
+    internal struct CommonBindingFlags
     {
-        Static = BindingFlags.Public | BindingFlags.Static,
-        Instance = BindingFlags.Public | BindingFlags.Instance,
-        GetField = BindingFlags.Public | BindingFlags.GetField,
-        GetProperty = BindingFlags.Public | BindingFlags.GetProperty,
-        SetField = BindingFlags.Public | BindingFlags.SetField,
-        SetProperty = BindingFlags.Public | BindingFlags.SetProperty,
-        PrivateStatic = BindingFlags.NonPublic | BindingFlags.Static,
-        PrivateInstance = BindingFlags.NonPublic | BindingFlags.Instance
+        public const BindingFlags Static = BindingFlags.Public | BindingFlags.Static;
+        public const BindingFlags Instance = BindingFlags.Public | BindingFlags.Instance;
+        public const BindingFlags GetField = BindingFlags.Public | BindingFlags.GetField;
+        public const BindingFlags GetProperty = BindingFlags.Public | BindingFlags.GetProperty;
+        public const BindingFlags SetField = BindingFlags.Public | BindingFlags.SetField;
+        public const BindingFlags SetProperty = BindingFlags.Public | BindingFlags.SetProperty;
+        public const BindingFlags PrivateStatic = BindingFlags.NonPublic | BindingFlags.Static;
+        public const BindingFlags PrivateInstance = BindingFlags.NonPublic | BindingFlags.Instance;
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]

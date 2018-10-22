@@ -8,29 +8,25 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerEatEvent : CancelEventArgs
     {
         public User User { get; set; }
-
         public FoodItem FoodItem { get; set; }
+        public Stomach Stomach { get; protected set; } //protected because we can't change it
 
-        public Stomach Stomach { get; protected set; }  //protected because we can't change it
-
-        public PlayerEatEvent(ref User pUser, ref FoodItem pFoodIten, ref Stomach pStomach) : base()
+        public PlayerEatEvent(ref User user, ref FoodItem foodItem, ref Stomach stomach)
         {
-            this.User = pUser;
-            this.FoodItem = pFoodIten;
-            this.Stomach = pStomach;
+            User = user;
+            FoodItem = foodItem;
+            Stomach = stomach;
         }
     }
 
-    internal class PlayerEatEventHelper
+    [EventPatchSite(typeof(Stomach), "Eat", CommonBindingFlags.Instance)]
+    internal class PlayerEatEventEmitter : EventEmitter<PlayerEatEvent>
     {
         public static bool Prefix(ref FoodItem food, ref Stomach __instance)
         {
-            PlayerEatEvent cEvent = new PlayerEatEvent(ref __instance.Owner, ref food, ref __instance);
-            EventArgs args = cEvent;
-
-            EventManager.CallEvent(ref args);
-
-            return !cEvent.Cancel;
+            var evt = new PlayerEatEvent(ref __instance.Owner, ref food, ref __instance);
+            Emit(ref evt);
+            return !evt.Cancel;
         }
     }
 }

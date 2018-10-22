@@ -15,11 +15,11 @@ namespace Asphalt.Events.PlayerEvents
         public StoreComponent Store { get; set; }
         public Item Item { get; set; }
 
-        public PlayerBuyEvent(ref User pUser, ref StoreComponent pStore, ref Item pItem) : base()
+        public PlayerBuyEvent(ref User user, ref StoreComponent store, ref Item item)
         {
-            User = pUser;
-            Store = pStore;
-            Item = pItem;
+            User = user;
+            Store = store;
+            Item = item;
         }
     }
 

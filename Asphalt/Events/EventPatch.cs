@@ -20,10 +20,10 @@ namespace Asphalt.Events
                 throw new ArgumentNullException("EventPatchSite", $"EventPatchSite attribute missing on {patchClass.FullName}");
             }
 
-            var prefixSite = patchClass.GetMethod("Prefix", InjectionUtils.PUBLIC_STATIC);
+            var prefixSite = patchClass.GetMethod("Prefix", CommonBindingFlags.Static);
             var prefix = (prefixSite != null) ? new HarmonyMethod(prefixSite) : null;
 
-            var postfixSite = patchClass.GetMethod("Postfix", InjectionUtils.PUBLIC_STATIC);
+            var postfixSite = patchClass.GetMethod("Postfix", CommonBindingFlags.Static);
             var postfix = (postfixSite != null) ? new HarmonyMethod(postfixSite) : null;
 
             return new EventPatch()

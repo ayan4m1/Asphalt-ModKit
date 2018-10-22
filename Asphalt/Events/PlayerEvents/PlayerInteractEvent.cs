@@ -14,12 +14,13 @@ namespace Asphalt.Events.PlayerEvents
     {
         public InteractionContext Context { get; set; }
 
-        public PlayerInteractEvent(ref InteractionContext pContext) : base()
+        public PlayerInteractEvent(ref InteractionContext context)
         {
-            this.Context = pContext;
+            Context = context;
         }
     }
 
+    [EventPatchSite(typeof(InteractionExtensions), "MakeContext", CommonBindingFlags.Static)]
     internal static class PlayerInteractEventHelper
     {
         public static void Postfix(this InteractionInfo info, ref InteractionContext __result)

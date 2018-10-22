@@ -13,17 +13,15 @@ namespace Asphalt.Events.PlayerEvents
     /// </summary>
     public class PlayerClaimPropertyEvent : CancelEventArgs
     {
+        public Guid AuthId { get; set; }
         public User User { get; set; }
-
         public Vector2i Position { get; set; }
 
-        public Guid AuthId { get; set; }
-
-        public PlayerClaimPropertyEvent(ref Guid pAuthId, ref User pUser, ref Vector2i pPosition) : base()
+        public PlayerClaimPropertyEvent(ref Guid authId, ref User user, ref Vector2i position)
         {
-            this.AuthId = pAuthId;
-            this.User = pUser;
-            this.Position = pPosition;
+            AuthId = authId;
+            User = user;
+            Position = position;
         }
     }
 

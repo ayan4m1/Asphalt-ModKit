@@ -14,7 +14,7 @@ namespace Asphalt.Events.InventoryEvents
         public ItemStack DestinationStack { get; protected set; }
         public User User { get; protected set; }
 
-        public InventoryMoveItemEvent(ItemStack source, ItemStack destination, User user) : base()
+        public InventoryMoveItemEvent(ItemStack source, ItemStack destination, User user)
         {
             SourceStack = source;
             DestinationStack = destination;
