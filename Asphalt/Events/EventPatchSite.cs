@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace Asphalt.Events
 {
+    /// <summary>
+    /// Defines bitwise combinations of BindingFlags for common use cases.
+    /// </summary>
     internal struct CommonBindingFlags
     {
         public const BindingFlags Static = BindingFlags.Public | BindingFlags.Static;
@@ -16,6 +20,9 @@ namespace Asphalt.Events
         public const BindingFlags SetProperty = BindingFlags.Public | BindingFlags.SetProperty;
     }
 
+    /// <summary>
+    /// Indicates that a Harmony patch should be installed using this class as its source.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class EventPatchSite : Attribute
     {
@@ -30,11 +37,7 @@ namespace Asphalt.Events
         /// <param name="methodName">Name of the method to bind</param>
         public EventPatchSite(Type type, string methodName)
         {
-            PatchSite = HuntForMethod(type, methodName);
-            if (PatchSite == null)
-            {
-                throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}");
-            }
+            PatchSite = HuntForMethod(type, methodName) ?? throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}"); ;
         }
 
         /// <summary>
@@ -45,15 +48,9 @@ namespace Asphalt.Events
         /// <param name="flags">BindingFlags describing the method to bind</param>
         public EventPatchSite(Type type, string methodName, BindingFlags flags)
         {
-            PatchSite = type.GetMethod(methodName, flags);
-            if (PatchSite == null)
-            {
-                PatchSite = HuntForMethod(type, methodName);
-                if (PatchSite == null)
-                {
-                    throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}");
-                }
-            }
+            PatchSite = type.GetMethod(methodName, flags) ??
+                HuntForMethod(type, methodName) ??
+                throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}"); ;
         }
 
         /// <summary>
