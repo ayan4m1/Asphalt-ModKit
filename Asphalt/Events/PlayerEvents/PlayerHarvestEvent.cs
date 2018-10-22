@@ -13,10 +13,10 @@ namespace Asphalt.Events.PlayerEvents
         public Player Player { get; set; }
         public Organism Target { get; set; }
 
-        public PlayerHarvestEvent(ref Player pPlayer, ref Organism pTarget)
+        public PlayerHarvestEvent(ref Player player, ref Organism target)
         {
-            this.Player = pPlayer;
-            this.Target = pTarget;
+            Player = player;
+            Target = target;
         }
     }
 

@@ -16,14 +16,13 @@ namespace Asphalt.Events.PlayerEvents
         }
     }
 
-    internal class PlayerLogoutEventHelper
+    [EventPatchSite(typeof(User), "Logout")]
+    internal class PlayerLogoutEventEmitter : EventEmitter<PlayerLogoutEvent>
     {
         public static void Prefix(User __instance)
         {
-            PlayerLogoutEvent cEvent = new PlayerLogoutEvent(__instance);
-            EventArgs EventArgs = cEvent;
-
-            EventManager.CallEvent(ref EventArgs);
+            var evt = new PlayerLogoutEvent(__instance);
+            Emit(evt);
         }
     }
 }

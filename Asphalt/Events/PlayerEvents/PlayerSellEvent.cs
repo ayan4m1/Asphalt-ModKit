@@ -2,6 +2,7 @@
 using Eco.Gameplay.Components;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using System;
 using System.ComponentModel;
@@ -14,35 +15,31 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerSellEvent : CancelEventArgs
     {
         public User User { get; set; }
-
         public StoreComponent Store { get; set; }
-
         public Item Item { get; set; }
 
-        public PlayerSellEvent(ref User pUser, ref StoreComponent pStore, ref Item pItem) : base()
+        public PlayerSellEvent(ref User user, ref StoreComponent store, ref Item item)
         {
-            this.User = pUser;
-            this.Store = pStore;
-            this.Item = pItem;
+            User = user;
+            Store = store;
+            Item = item;
         }
     }
 
-    internal class PlayerSellEventHelper
+    [AtomicActionEventPatchSite(typeof(SellPlayerActionManager))]
+    internal class PlayerSellEventEmitter : EventEmitter<PlayerSellEvent>
     {
         public static bool Prefix(ref User user, ref StoreComponent store, ref Item item, ref IAtomicAction __result)
         {
-            PlayerSellEvent cEvent = new PlayerSellEvent(ref user, ref store, ref item);
-            EventArgs args = cEvent;
+            var evt = new PlayerSellEvent(ref user, ref store, ref item);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to sell!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

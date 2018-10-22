@@ -21,16 +21,15 @@ namespace Asphalt.Events.PlayerEvents
     }
 
     [EventPatchSite(typeof(InteractionExtensions), "MakeContext", CommonBindingFlags.Static)]
-    internal static class PlayerInteractEventHelper
+    internal class PlayerInteractEventEmitter : EventEmitter<PlayerInteractEvent>
     {
-        public static void Postfix(this InteractionInfo info, ref InteractionContext __result)
+        public static void Postfix(InteractionInfo info, ref InteractionContext __result)
         {
-            PlayerInteractEvent playerInteractEvent = new PlayerInteractEvent(ref __result);
-            EventArgs playerInteractEventArgs = playerInteractEvent;
+            var evt = new PlayerInteractEvent(ref __result);
 
-            EventManager.CallEvent(ref playerInteractEventArgs);
+            Emit(ref evt);
 
-            if (playerInteractEvent.Cancel)
+            if (evt.Cancel)
             {
                 //we can not really cancel the event, but we remove all targets ;)
 
@@ -51,7 +50,5 @@ namespace Asphalt.Events.PlayerEvents
                 WorldLayerManager.GetLayer(LayerNames.PlayerActivity)?.FuncAtWorldPos(__result.Player.Position.XZi, (pos, val) => val = Math.Max(0, val - 0.001f));
             }
         }
-
-
     }
 }

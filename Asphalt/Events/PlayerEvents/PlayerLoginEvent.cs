@@ -10,24 +10,22 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerLoginEvent : EventArgs
     {
         public Player Player { get; protected set; }
-
         public INetClient Client { get; protected set; }
 
-        public PlayerLoginEvent(Player pPlayer, INetClient pClient) : base()
+        public PlayerLoginEvent(Player player, INetClient netClient)
         {
-            this.Player = pPlayer;
-            this.Client = pClient;
+            Player = player;
+            Client = netClient;
         }
     }
 
-    internal class PlayerLoginEventHelper
+    [EventPatchSite(typeof(User), "Login")]
+    internal class PlayerLoginEventEmitter : EventEmitter<PlayerLoginEvent>
     {
-        public static void Prefix(Player player, INetClient client)
+        public static void Prefix(Player player, INetClient netClient)
         {
-            PlayerLoginEvent cEvent = new PlayerLoginEvent(player, client);
-            EventArgs EventArgs = cEvent;
-
-            EventManager.CallEvent(ref EventArgs);
+            var evt = new PlayerLoginEvent(player, netClient);
+            Emit(evt);
         }
     }
 }

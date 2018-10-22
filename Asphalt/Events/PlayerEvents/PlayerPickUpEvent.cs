@@ -1,6 +1,7 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using Eco.Shared.Math;
 using System;
@@ -11,35 +12,31 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerPickUpEvent : CancelEventArgs
     {
         public Player Player { get; set; }
-
         public BlockItem PickedUpItem { get; set; }
-
         public Vector3i Position { get; set; }
 
-        public PlayerPickUpEvent(ref Player pPlayer, ref BlockItem pPickedUpItem, ref Vector3i pPosition) : base()
+        public PlayerPickUpEvent(ref Player player, ref BlockItem pickedUpItem, ref Vector3i position)
         {
-            this.Player = pPlayer;
-            this.PickedUpItem = pPickedUpItem;
-            this.Position = pPosition;
+            Player = player;
+            PickedUpItem = pickedUpItem;
+            Position = position;
         }
     }
 
-    internal class PlayerPickUpEventHelper
+    [AtomicActionEventPatchSite(typeof(PickUpPlayerActionManager))]
+    internal class PlayerPickUpEventEmitter : EventEmitter<PlayerPickUpEvent>
     {
         public static bool Prefix(ref Player player, ref BlockItem pickedUpItem, ref Vector3i position, ref IAtomicAction __result)
         {
-            PlayerPickUpEvent cEvent = new PlayerPickUpEvent(ref player, ref pickedUpItem, ref position);
-            EventArgs args = cEvent;
+            var evt = new PlayerPickUpEvent(ref player, ref pickedUpItem, ref position);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to pick up!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

@@ -3,6 +3,7 @@ using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
 using System.ComponentModel;
 using System;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 
 namespace Asphalt.Events.PlayerEvents
 {
@@ -10,28 +11,26 @@ namespace Asphalt.Events.PlayerEvents
     {
         public User User { get; set; }
 
-        public PlayerProposeVoteEvent(ref User pUser) : base()
+        public PlayerProposeVoteEvent(ref User user)
         {
-            User = pUser;
+            User = user;
         }
     }
 
-    internal class PlayerProposeVoteEventHelper
+    [AtomicActionEventPatchSite(typeof(ProposeVotePlayerActionManager))]
+    internal class PlayerProposeVoteEventEmitter : EventEmitter<PlayerProposeVoteEvent>
     {
         public static bool Prefix(ref User user, ref IAtomicAction __result)
         {
-            PlayerProposeVoteEvent cEvent = new PlayerProposeVoteEvent(ref user);
-            EventArgs args = cEvent;
+            var evt = new PlayerProposeVoteEvent(ref user);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to propose vote!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

@@ -10,28 +10,25 @@ namespace Asphalt.Events.PlayerEvents
     {
         public User User { get; set; }
 
-        public PlayerVoteEvent(ref User pUser) : base()
+        public PlayerVoteEvent(ref User user)
         {
-            this.User = pUser;
+            User = user;
         }
     }
 
-    internal class PlayerVoteEventHelper
+    internal class PlayerVoteEventEmitter : EventEmitter<PlayerVoteEvent>
     {
         public static bool Prefix(ref User user, ref IAtomicAction __result)
         {
-            PlayerVoteEvent cEvent = new PlayerVoteEvent(ref user);
-            EventArgs args = cEvent;
+            var evt = new PlayerVoteEvent(ref user);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to vote!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

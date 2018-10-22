@@ -13,23 +13,21 @@ namespace Asphalt.Events.PlayerEvents
         public Player Player { get; set; }
         public Vector3 Position { get; set; }
 
-        public PlayerTeleportEvent(ref Player pPlayer, ref Vector3 pPosition) : base()
+        public PlayerTeleportEvent(ref Player player, ref Vector3 position)
         {
-            this.Player = pPlayer;
-            this.Position = pPosition;
+            Player = player;
+            Position = position;
         }
     }
-
-    internal class PlayerTeleportEventHelper
+    [EventPatchSite(typeof(Player), "SetPosition", CommonBindingFlags.Instance)]
+    internal class PlayerTeleportEventEmitter : EventEmitter<PlayerTeleportEvent>
     {
         public static bool Prefix(ref Vector3 position, ref Player __instance)
         {
-            PlayerTeleportEvent cEvent = new PlayerTeleportEvent(ref __instance, ref position);
-            EventArgs args = cEvent;
+            var evt = new PlayerTeleportEvent(ref __instance, ref position);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            return !cEvent.Cancel;
+            return !evt.Cancel;
         }
     }
 }

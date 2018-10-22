@@ -13,7 +13,7 @@ namespace Asphalt.Events.PlayerEvents
 
         public PlayerGetElectedEvent(ref User pUser) : base()
         {
-            this.User = pUser;
+            User = pUser;
         }
     }
 

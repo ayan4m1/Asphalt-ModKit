@@ -1,6 +1,7 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using Eco.Shared.Math;
 using System;
@@ -11,35 +12,31 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerPlaceEvent : CancelEventArgs
     {
         public Player Player { get; set; }
-
         public BlockItem Item { get; set; }
-
         public Vector3i Position { get; set; }
 
-        public PlayerPlaceEvent(ref Player pPlayer, ref BlockItem pPlacedItem, ref Vector3i pPosition) : base()
+        public PlayerPlaceEvent(ref Player player, ref BlockItem item, ref Vector3i position)
         {
-            this.Player = pPlayer;
-            this.Item = pPlacedItem;
-            this.Position = pPosition;
+            Player = player;
+            Item = item;
+            Position = position;
         }
     }
 
-    internal class PlayerPlaceEventHelper
+    [AtomicActionEventPatchSite(typeof(PlacePlayerActionManager))]
+    internal class PlayerPlaceEventEmitter : EventEmitter<PlayerPlaceEvent>
     {
-        public static bool Prefix(ref Player player, ref BlockItem placedItem, ref Vector3i position, ref IAtomicAction __result)
+        public static bool Prefix(ref Player player, ref BlockItem item, ref Vector3i position, ref IAtomicAction __result)
         {
-            PlayerPlaceEvent cEvent = new PlayerPlaceEvent(ref player, ref placedItem, ref position);
-            EventArgs args = cEvent;
+            var evt = new PlayerPlaceEvent(ref player, ref item, ref position);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to place!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

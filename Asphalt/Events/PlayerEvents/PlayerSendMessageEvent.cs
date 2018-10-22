@@ -1,5 +1,6 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using Eco.Shared.Services;
 using System;
@@ -13,32 +14,29 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerSendMessageEvent : CancelEventArgs
     {
         public User User { get; set; }
-
         public ChatMessage Message { get; set; }
 
-        public PlayerSendMessageEvent(ref User user, ref ChatMessage message) : base()
+        public PlayerSendMessageEvent(ref User user, ref ChatMessage message)
         {
-            this.User = user;
-            this.Message = message;
+            User = user;
+            Message = message;
         }
     }
 
-    internal class PlayerSendMessageEventHelper
+    [AtomicActionEventPatchSite(typeof(MessagePlayerActionManager))]
+    internal class PlayerSendMessageEventEmitter : EventEmitter<PlayerSendMessageEvent>
     {
         public static bool Prefix(ref User user, ref ChatMessage message, ref IAtomicAction __result)
         {
-            PlayerSendMessageEvent cEvent = new PlayerSendMessageEvent(ref user, ref message);
-            EventArgs args = cEvent;
+            var evt = new PlayerSendMessageEvent(ref user, ref message);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to send message!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

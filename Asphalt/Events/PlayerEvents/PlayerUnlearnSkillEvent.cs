@@ -1,6 +1,7 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
 using Eco.Gameplay.Skills;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using System;
 using System.ComponentModel;
@@ -13,32 +14,29 @@ namespace Asphalt.Events.PlayerEvents
     public class PlayerUnlearnSkillEvent : CancelEventArgs
     {
         public Player Player { get; set; }
-
         public Skill Skill { get; set; }
 
-        public PlayerUnlearnSkillEvent(ref Player pPlayer, ref Skill pSkill) : base()
+        public PlayerUnlearnSkillEvent(ref Player player, ref Skill skill)
         {
-            this.Player = pPlayer;
-            this.Skill = pSkill;
+            Player = player;
+            Skill = skill;
         }
     }
 
-    internal class PlayerUnlearnSkillEventHelper
+    [AtomicActionEventPatchSite(typeof(UnlearnSkillPlayerActionManager))]
+    internal class PlayerUnlearnSkillEventEmitter : EventEmitter<PlayerUnlearnSkillEvent>
     {
         public static bool Prefix(ref Player player, ref Skill skill, ref IAtomicAction __result)
         {
-            PlayerUnlearnSkillEvent cEvent = new PlayerUnlearnSkillEvent(ref player, ref skill);
-            EventArgs args = cEvent;
+            var evt = new PlayerUnlearnSkillEvent(ref player, ref skill);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (cEvent.Cancel)
+            if (evt.Cancel)
             {
-                __result = new FailedAtomicAction(new LocString());
-                return false;
+                __result = new FailedAtomicAction(new LocString("Failed to unlearn skill!"));
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }
