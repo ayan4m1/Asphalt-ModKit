@@ -8,25 +8,21 @@ namespace Asphalt.Events.WorldObjectEvents
     {
         public WorldObject WorldObject { get; set; }
 
-        public WorldObjectDestroyedEvent(ref WorldObject pWorldObject) : base()
+        public WorldObjectDestroyedEvent(ref WorldObject worldObject)
         {
-            WorldObject = pWorldObject;
+            WorldObject = worldObject;
         }
     }
 
-    internal class WorldObjectDestroyedEventHelper
+    [EventPatchSite(typeof(WorldObject), "Destroy", CommonBindingFlags.Instance)]
+    internal class WorldObjectDestroyedEventEmitter : EventEmitter<WorldObjectDestroyedEvent>
     {
         public static bool Prefix(ref WorldObject __instance, ref bool __state)
         {
-            WorldObjectDestroyedEvent dEvent = new WorldObjectDestroyedEvent(ref __instance);
-            EventArgs args = dEvent;
+            var evt = new WorldObjectDestroyedEvent(ref __instance);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref args);
-
-            if (dEvent.Cancel)
-                return false;
-
-            return true;
+            return !evt.Cancel;
         }
 
     }

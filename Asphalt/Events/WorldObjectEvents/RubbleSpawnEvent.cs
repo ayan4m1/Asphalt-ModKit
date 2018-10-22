@@ -12,29 +12,27 @@ namespace Asphalt.Events.WorldObjectEvents
     {
         public RubbleObject RubbleObject { get; set; }
 
-        public RubbleSpawnEvent(ref RubbleObject obj) : base()
+        public RubbleSpawnEvent(ref RubbleObject rubbleObject)
         {
-            RubbleObject = obj;
+            RubbleObject = rubbleObject;
         }
     }
 
-    internal class RubbleSpawnEventHelper
+    [EventPatchSite(typeof(EcoObjectManager), "Add", CommonBindingFlags.Static)]
+    internal class RubbleSpawnEventEmitter : EventEmitter<RubbleSpawnEvent>
     {
-        public static void Postfix(ref IEcoObject ecoObject)
+        public static void Postfix(ref IEcoObject obj)
         {
-            if (!(ecoObject is RubbleObject))
+            if (!(obj is RubbleObject rubble))
                 return;
 
-            RubbleObject rubble = (RubbleObject)ecoObject;
+            var evt = new RubbleSpawnEvent(ref rubble);
+            Emit(ref evt);
 
-            RubbleSpawnEvent sre = new RubbleSpawnEvent(ref rubble);
-            EventArgs sreEvent = sre;
-
-            EventManager.CallEvent(ref sreEvent);
-
-            if (sre.Cancel)
+            if (evt.Cancel)
+            {
                 typeof(RubbleObject).GetMethod("Destroy", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(rubble, new object[] { });
-
+            }
         }
     }
 }

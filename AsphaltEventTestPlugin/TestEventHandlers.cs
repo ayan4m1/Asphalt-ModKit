@@ -166,7 +166,7 @@ namespace AsphaltEventTestPlugin
         [EventHandler]
         public void OnSpawnRubbleEvent(RpcInvokeEvent evt)
         {
-            Console.WriteLine($"rpc received {evt.Methodname}");
+            Console.WriteLine($"rpc received {evt.MethodName}");
         }
     }
 }

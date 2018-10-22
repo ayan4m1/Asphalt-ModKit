@@ -22,16 +22,12 @@ namespace Asphalt.Events.WorldObjectEvents
         }
     }
 
-    internal class WorldObjectChangeTextEventHelper
+    [EventPatchSite(typeof(CustomTextComponent), "SetText", CommonBindingFlags.Instance)]
+    internal class WorldObjectChangeTextEventEmitter : EventEmitter<WorldObjectChangeTextEvent>
     {
-        public static bool Prefix(ref Player player, string text, ref CustomTextComponent __instance)
+        public static void Prefix(ref Player player, string text, ref CustomTextComponent __instance)
         {
-            WorldObjectChangeTextEvent imie = new WorldObjectChangeTextEvent(player, __instance.Parent, text);
-            EventArgs imieEvent = imie;
-
-            EventManager.CallEvent(ref imieEvent);
-
-            return true;
+            Emit(new WorldObjectChangeTextEvent(player, __instance.Parent, text));
         }
     }
 }

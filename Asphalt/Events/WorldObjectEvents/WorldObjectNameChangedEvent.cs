@@ -7,13 +7,14 @@ namespace Asphalt.Events.WorldObjectEvents
     {
         public WorldObject WorldObject { get; protected set; }
 
-        public WorldObjectNameChangedEvent(WorldObject pWorldObject) : base()
+        public WorldObjectNameChangedEvent(WorldObject worldObject)
         {
-            WorldObject = pWorldObject;
+            WorldObject = worldObject;
         }
     }
 
-    internal class WorldObjectNameChangedEventHelper
+    [EventPatchSite(typeof(WorldObject), "SetName", CommonBindingFlags.Instance)]
+    internal class WorldObjectNameChangedEventEmitter : EventEmitter<WorldObjectNameChangedEvent>
     {
         public static void Prefix(WorldObject __instance, ref string __state)
         {
@@ -25,10 +26,7 @@ namespace Asphalt.Events.WorldObjectEvents
             if (__state == __instance.Name)
                 return;
 
-            WorldObjectNameChangedEvent cEvent = new WorldObjectNameChangedEvent(__instance);
-            EventArgs EventArgs = cEvent;
-
-            EventManager.CallEvent(ref EventArgs);
+            Emit(new WorldObjectNameChangedEvent(__instance));
         }
     }
 }

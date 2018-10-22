@@ -12,29 +12,27 @@ namespace Asphalt.Events.WorldObjectEvents
         public TreeEntity TreeEntity { get; set; }
         public INetObject Killer { get; set; }
 
-        public TreeFellEvent(ref TreeEntity tree, ref INetObject killer) : base()
+        public TreeFellEvent(ref TreeEntity tree, ref INetObject killer)
         {
             TreeEntity = tree;
             Killer = killer;
         }
     }
 
-    internal class TreeFellEventHelper
+    [EventPatchSite(typeof(TreeEntity), "FellTree", CommonBindingFlags.PrivateInstance)]
+    internal class TreeFellEventEmitter : EventEmitter<TreeFellEvent>
     {
         public static bool Prefix(ref TreeEntity __instance, ref INetObject killer)
         {
-            var tfe = new TreeFellEvent(ref __instance, ref killer);
-            var tfeEvent = (EventArgs)tfe;
+            var evt = new TreeFellEvent(ref __instance, ref killer);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref tfeEvent);
-
-            if (tfe.Cancel)
+            if (evt.Cancel)
             {
                 __instance.RPC("UpdateHP", __instance.Species.TreeHealth);
-                return false;
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

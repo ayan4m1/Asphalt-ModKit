@@ -1,6 +1,8 @@
-﻿using Eco.Shared.Serialization;
+﻿using Eco.Shared.Networking;
+using Eco.Shared.Serialization;
 using System;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Asphalt.Events.RpcEvents
 {
@@ -9,32 +11,30 @@ namespace Asphalt.Events.RpcEvents
     /// </summary>
     public class RpcInvokeEvent : CancelEventArgs
     {
-        public string Methodname { get; protected set; }
+        public string MethodName { get; protected set; }
         public BSONObject Bson { get; protected set; }
 
-        public RpcInvokeEvent(string methodname, BSONObject bson) : base()
+        public RpcInvokeEvent(string methodName, BSONObject bson)
         {
-            Methodname = methodname;
+            MethodName = methodName;
             Bson = bson;
         }
     }
 
-    internal class RpcInvokeEventHelper
+    [EventPatchSite(typeof(RPCManager), "InvokeOn", CommonBindingFlags.Static, 5)]
+    internal class RpcInvokeEventEmitter : EventEmitter<RpcInvokeEvent>
     {
-        public static bool Prefix(ref string methodname, ref BSONObject bson, object __result)
+        public static bool Prefix(ref string methodName, ref BSONObject bson, object __result)
         {
-            RpcInvokeEvent rie = new RpcInvokeEvent(methodname, bson);
-            EventArgs rieEvent = rie;
+            var evt = new RpcInvokeEvent(methodName, bson);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref rieEvent);
-
-            if (rie.Cancel)
+            if (evt.Cancel)
             {
                 __result = null;
-                return false;
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }

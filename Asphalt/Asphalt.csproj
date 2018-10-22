@@ -55,7 +55,6 @@
     <Compile Include="Events\WorldObjectEvents\TreeFellEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\RubbleSpawnEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectChangeTextEvent.cs" />
-    <Compile Include="Events\EventManagerHelper.cs" />
     <Compile Include="Events\EventBinding.cs" />
     <Compile Include="Events\EventHandlerAttribute.cs" />
     <Compile Include="Events\EventManager.cs" />

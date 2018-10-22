@@ -24,16 +24,15 @@ namespace Asphalt.Events.WorldObjectEvents
         }
     }
 
-    internal class TreeChopEventHelper
+    [EventPatchSite(typeof(TreeEntity), "TryApplyDamage", CommonBindingFlags.Instance)]
+    internal class TreeChopEventEmitter : EventEmitter<TreeChopEvent>
     {
         public static bool Prefix(ref TreeEntity __instance, INetObject damager, float amount, InteractionContext context)
         {
-            var tce = new TreeChopEvent(ref __instance, ref damager, ref amount, ref context);
-            var tceEvent = (EventArgs)tce;
+            var evt = new TreeChopEvent(ref __instance, ref damager, ref amount, ref context);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref tceEvent);
-
-            return tce.Cancel;
+            return !evt.Cancel;
         }
     }
 }

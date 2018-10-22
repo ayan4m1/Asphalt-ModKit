@@ -7,13 +7,14 @@ namespace Asphalt.Events.WorldObjectEvents
     {
         public WorldObject WorldObject { get; protected set; }
 
-        public WorldObjectOperatingChangedEvent(WorldObject pWorldObject) : base()
+        public WorldObjectOperatingChangedEvent(WorldObject worldObject)
         {
-            WorldObject = pWorldObject;
+            WorldObject = worldObject;
         }
     }
 
-    internal class WorldObjectOperatingChangedEventHelper
+    [EventPatchSite(typeof(WorldObject), "set_Operating", CommonBindingFlags.PrivateInstance)]
+    internal class WorldObjectOperatingChangedEventEmitter : EventEmitter<WorldObjectOperatingChangedEvent>
     {
         public static void Prefix(WorldObject __instance, ref bool __state)
         {
@@ -25,10 +26,7 @@ namespace Asphalt.Events.WorldObjectEvents
             if (__state == __instance.Operating)
                 return;
 
-            WorldObjectOperatingChangedEvent cEvent = new WorldObjectOperatingChangedEvent(__instance);
-            EventArgs EventArgs = cEvent;
-
-            EventManager.CallEvent(ref EventArgs);
+            Emit(new WorldObjectOperatingChangedEvent(__instance));
         }
     }
 }

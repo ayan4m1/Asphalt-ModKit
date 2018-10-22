@@ -15,29 +15,27 @@ namespace Asphalt.Events.WorldObjectEvents
         public WorldObject WorldObject { get; set; }
         public Player Picker { get; set; }
 
-        public WorldObjectPickupEvent(ref WorldObject worldObject, ref Player picker) : base()
+        public WorldObjectPickupEvent(ref WorldObject worldObject, ref Player picker)
         {
             WorldObject = worldObject;
             Picker = picker;
         }
     }
 
-    internal class WorldObjectPickupEventHelper
+    [EventPatchSite(typeof(WorldObject), "TryPickUp", CommonBindingFlags.Instance)]
+    internal class WorldObjectPickupEventEmitter : EventEmitter<WorldObjectPickupEvent>
     {
         public static bool Prefix(ref Player player, ref WorldObject __instance, ref IAtomicAction __result)
         {
-            var wope = new WorldObjectPickupEvent(ref __instance, ref player);
-            var wopeEvent = (EventArgs)wope;
+            var evt = new WorldObjectPickupEvent(ref __instance, ref player);
+            Emit(ref evt);
 
-            EventManager.CallEvent(ref wopeEvent);
-
-            if (wope.Cancel)
+            if (evt.Cancel)
             {
                 __result = new FailedAtomicAction(new LocString("Asphalt " + nameof(WorldObjectPickupEvent)));
-                return false;
             }
 
-            return true;
+            return !evt.Cancel;
         }
     }
 }
