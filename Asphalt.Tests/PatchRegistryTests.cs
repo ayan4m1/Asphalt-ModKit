@@ -24,7 +24,7 @@ namespace Asphalt.Tests
         [Test]
         public void CannotRegisterPatchTwice()
         {
-            Assert.Throws(typeof(ArgumentException), () =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 var firstPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
                 var secondPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
@@ -41,7 +41,7 @@ namespace Asphalt.Tests
         [Test]
         public void CannotRegisterPatchWithInvalidSite()
         {
-            Assert.Throws(typeof(ArgumentException), () =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 PatchRegistry.RegisterPatch(typeof(PatchRegistryTestWithInvalidPatchSite));
             });
@@ -50,7 +50,7 @@ namespace Asphalt.Tests
         [Test]
         public void CannotRegisterPatchLackingSite()
         {
-            Assert.Throws(typeof(ArgumentNullException), () =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 PatchRegistry.RegisterPatch(typeof(PatchRegistryTestWithoutPatchSite));
             });
