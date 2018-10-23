@@ -18,10 +18,12 @@ sed -i "s#AssemblyInformationalVersion(\d34.*\d34)#AssemblyInformationalVersion(
 OUTPUT_FILE="Asphalt.$ASSEMBLY_INFO_VERSION.nupkg"
 echo "Preparing to build $OUTPUT_FILE"
 
-./nuget.exe pack "Asphalt/Asphalt.nuspec" -Version "$ASSEMBLY_INFO_VERSION"
+nuget pack "Asphalt/Asphalt.nuspec" -Version "$ASSEMBLY_INFO_VERSION"
 
 if [ -z "$NUGET_API_KEY" ] || [ -z "$NUGET_FEED_URL" ]; then
 	echo "No NuGet API key/feed URL provided, skipping deploy!"
 else
-	./nuget.exe push $OUTPUT_FILE $NUGET_API_KEY -source $NUGET_FEED_URL
+	nuget push "$OUTPUT_FILE" $NUGET_API_KEY -source "$NUGET_FEED_URL"
 fi
+
+sed -i "s#AssemblyInformationalVersion(\d34.*\d34)#AssemblyInformationalVersion(\"$ASSEMBLY_VERSION\")#" "Asphalt/Properties/AssemblyInfo.cs"
