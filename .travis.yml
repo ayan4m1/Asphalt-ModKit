@@ -4,7 +4,7 @@ install:
   - nuget restore Asphalt.sln
   - nuget install NUnit.Console -OutputDirectory runner
 script:
-  - xbuild /p:Configuration=Release Asphalt.sln
+  - msbuild /p:Configuration=Release Asphalt.sln
   - mono ./runner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Asphalt.Tests/bin/x64/Release/Asphalt.Tests.dll
 after_script:
   - ./package.sh
