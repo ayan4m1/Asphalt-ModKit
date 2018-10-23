@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventPatchTests.cs" />
-    <Compile Include="EventTests.cs" />
     <Compile Include="PatchRegistryTests.cs" />
     <Compile Include="PluginTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
