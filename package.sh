@@ -1,16 +1,27 @@
-if [ -z "$TRAVIS_BUILD_NUMBER" ]; then
-	VERSION=1
-else
-	VERSION=$TRAVIS_BUILD_NUMBER
+ASSEMBLY_VERSION=$(cat Asphalt/Properties/AssemblyInfo.cs | grep -oP 'AssemblyVersion\("\K[0-9]+.[0-9]+.[0-9]+.[0-9]+')
+echo "Extracted version $ASSEMBLY_VERSION"
+
+if [ -z "$TRAVIS_COMMIT" ]; then
+	TRAVIS_COMMIT=$(git rev-parse HEAD)
+	TRAVIS_COMMIT="${TRAVIS_COMMIT:0:8}"
 fi
 
 if [ ! -z "$TRAVIS_BRANCH" ]; then
-	sed -i "s#\(AssemblyConfiguration(\d34\).*\d34#\1$TRAVIS_BRANCH\d34#" "Asphalt/Properties/AssemblyInfo.cs"
+	sed -i "s#AssemblyConfiguration(\d34.*\d34)#AssemblyConfiguration(\d34$TRAVIS_BRANCH\d34)#" "Asphalt/Properties/AssemblyInfo.cs"
 fi
 
-sed -i "s#\(Assembly\(Informational\|File\)\?Version(\d34[0-9]\+\.[0-9]\+\.[0-9]\+\.\)[0-9]\+#\1$VERSION#" "Asphalt/Properties/AssemblyInfo.cs"
+ASSEMBLY_INFO_VERSION="$ASSEMBLY_VERSION-$TRAVIS_COMMIT"
+echo "Setting informational version to $ASSEMBLY_INFO_VERSION"
 
-ASSEMBLY_VERSION=$(cat Asphalt/Properties/AssemblyInfo.cs | grep -oP 'AssemblyVersion\("\K[0-9]+.[0-9]+.[0-9]+.[0-9]+')
-OUTPUT_FILE="AsphaltModKit.$ASSEMBLY_VERSION.nupkg"
+sed -i "s#AssemblyInformationalVersion(\d34.*\d34)#AssemblyInformationalVersion(\"$ASSEMBLY_INFO_VERSION\")#" "Asphalt/Properties/AssemblyInfo.cs"
 
-nuget pack "Asphalt/Asphalt.nuspec" -Version $ASSEMBLY_VERSION
+OUTPUT_FILE="Asphalt.$ASSEMBLY_INFO_VERSION.nupkg"
+echo "Preparing to build $OUTPUT_FILE"
+
+./nuget.exe pack "Asphalt/Asphalt.nuspec" -Version "$ASSEMBLY_INFO_VERSION"
+
+if [ -z "$NUGET_API_KEY" ] || [ -z "$NUGET_FEED_URL" ]; then
+	echo "No NuGet API key/feed URL provided, skipping deploy!"
+else
+	./nuget.exe push $OUTPUT_FILE $NUGET_API_KEY -source $NUGET_FEED_URL
+fi
