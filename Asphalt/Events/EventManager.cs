@@ -7,11 +7,7 @@
  * ------------------------------------
  **/
 
-using Asphalt.Exceptions;
-using Eco.Shared.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -32,7 +28,7 @@ namespace Asphalt.Events
 
                 var parameters = method.GetParameters();
                 if (parameters.Length != 1)
-                    throw new EventHandlerArgumentException("Incorrect number of arguments in method with EventHandlerAttribute!");
+                    throw new ArgumentException("Incorrect number of arguments in method with EventHandlerAttribute!");
 
                 var parameterType = parameters[0].ParameterType;
             }

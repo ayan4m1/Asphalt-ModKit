@@ -82,7 +82,6 @@
     <Compile Include="Events\PlayerEvents\PlayerInteractEvent.cs" />
     <Compile Include="Events\PlayerEvents\PlayerCraftEvent.cs" />
     <Compile Include="Events\PlayerEvents\PlayerSendMessageEvent.cs" />
-    <Compile Include="Exceptions\EventHandlerArgumentException.cs" />
     <Compile Include="Events\PlayerEvents\PlayerUnlearnSkillEvent.cs" />
     <Compile Include="Events\RpcEvents\RpcInvokeEvent.cs" />
     <Compile Include="Events\WorldEvents\WorldPolluteEvent.cs" />
