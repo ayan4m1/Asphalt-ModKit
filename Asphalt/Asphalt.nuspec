@@ -18,7 +18,7 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="bin\x64\Release\Asphalt.dll" target="lib\net472" />
-     <file src="bin\x64\Release\Asphalt.pdb" target="lib\net472" />
+     <file src="bin\x64\Release\Asphalt.dll" target="lib\net471" />
+     <file src="bin\x64\Release\Asphalt.pdb" target="lib\net471" />
    </files>
 </package>
