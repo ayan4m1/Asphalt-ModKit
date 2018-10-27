@@ -2,8 +2,10 @@
 using Asphalt.Events.InventoryEvents;
 using Asphalt.Events.PlayerEvents;
 using Asphalt.Events.RpcEvents;
+using Asphalt.Events.WorldEvents;
 using Asphalt.Events.WorldObjectEvents;
 using System;
+using EventHandler = Asphalt.Events.EventHandler;
 
 namespace AsphaltEventTestPlugin
 {
@@ -104,14 +106,12 @@ namespace AsphaltEventTestPlugin
             Console.WriteLine(evt.WorldObject.ToString());
         }
 
-        /*
         [EventHandler]
         public void OnWorldPollute(WorldPolluteEvent evt)
         {
             evt.Cancel = true;
             Console.WriteLine(evt.User.ToString());
-        }*/
-
+        }
 
         [EventHandler]
         public void OnPlayerEatEvent(PlayerEatEvent evt)
@@ -133,8 +133,6 @@ namespace AsphaltEventTestPlugin
             if (evt.User != null) Console.Write($"{evt.User.Name}");
             Console.Write($" moved from {evt.SourceStack.Quantity}x {evt.SourceStack.Item.FriendlyName}");
             if (!evt.DestinationStack.Empty) Console.Write($" to {evt.DestinationStack.Quantity}x {evt.DestinationStack.Item.FriendlyName}");
-            Console.WriteLine("");
-
             // evt.Cancel = true;
         }
 
