@@ -24,7 +24,7 @@ namespace Asphalt.Tests
         }
 
         [EventPatchSite(typeof(EventPatchTests), "TestMethod")]
-        internal class EventPatchTest
+        internal class EventPatchTest : EventEmitter<EventArgs>
         {
             public static void Prefix()
             {
