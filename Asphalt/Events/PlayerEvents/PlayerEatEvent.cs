@@ -1,6 +1,5 @@
 ﻿using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
-using System;
 using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents

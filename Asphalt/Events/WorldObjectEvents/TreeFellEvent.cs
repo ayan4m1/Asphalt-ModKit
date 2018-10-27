@@ -1,5 +1,4 @@
 ﻿using Eco.Shared.Networking;
-using System;
 using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents

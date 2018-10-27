@@ -2,7 +2,6 @@
 using Eco.Gameplay.Objects;
 using Eco.Gameplay.Players;
 using Eco.Shared.Localization;
-using System;
 using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents

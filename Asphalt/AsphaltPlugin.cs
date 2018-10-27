@@ -1,5 +1,4 @@
 ﻿using Asphalt.Events;
-using Asphalt.Events.InventoryEvents;
 using Asphalt.Utils;
 using Eco.Core.Plugins.Interfaces;
 using Harmony;

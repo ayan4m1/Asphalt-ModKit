@@ -4,7 +4,6 @@ using Eco.Gameplay.Items;
 using Eco.Gameplay.Players;
 using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
-using System;
 using System.ComponentModel;
 
 namespace Asphalt.Events.PlayerEvents

@@ -1,5 +1,4 @@
 ﻿using Eco.Gameplay.Objects;
-using System;
 using System.ComponentModel;
 
 namespace Asphalt.Events.WorldObjectEvents
