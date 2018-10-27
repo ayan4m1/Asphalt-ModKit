@@ -39,6 +39,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventPatchSiteTests.cs" />
     <Compile Include="EventPatchTests.cs" />
     <Compile Include="PatchRegistryTests.cs" />
     <Compile Include="PluginTests.cs" />

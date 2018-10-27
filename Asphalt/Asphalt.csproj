@@ -43,6 +43,7 @@
     <Compile Include="Chat\PageableList\IPageableList.cs" />
     <Compile Include="Chat\PageableList\PageableList.cs" />
     <Compile Include="Events\AtomicActionEventPatchSite.cs" />
+    <Compile Include="Events\CommonBindingFlags.cs" />
     <Compile Include="Events\EventEmitter.cs" />
     <Compile Include="Events\EventExtensions.cs" />
     <Compile Include="Events\EventPatchSite.cs" />
