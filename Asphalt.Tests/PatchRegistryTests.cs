@@ -58,19 +58,24 @@ namespace Asphalt.Tests
     }
 
     [EventPatchSite(typeof(SelectionInventory), "SelectIndex")]
-    internal class PatchRegistryTestOne
+    internal class PatchRegistryTestOne : EventEmitter<TestEventOne>
     {
         public static void Prefix() { }
     }
 
     [EventPatchSite(typeof(EconomyManager), "OnCreate")]
-    internal class PatchRegistryTestTwo
+    internal class PatchRegistryTestTwo : EventEmitter<TestEventTwo>
     {
         public static void Prefix() { }
     }
 
-    internal class PatchRegistryTestWithoutPatchSite { }
+    internal class PatchRegistryTestWithoutPatchSite : EventEmitter<TestEventThree> { }
 
     [EventPatchSite(typeof(EconomyManager), "NotAMethod")]
-    internal class PatchRegistryTestWithInvalidPatchSite { }
+    internal class PatchRegistryTestWithInvalidPatchSite : EventEmitter<TestEventFour> { }
+
+    internal class TestEventOne : EventArgs { }
+    internal class TestEventTwo : EventArgs { }
+    internal class TestEventThree : EventArgs { }
+    internal class TestEventFour : EventArgs { }
 }

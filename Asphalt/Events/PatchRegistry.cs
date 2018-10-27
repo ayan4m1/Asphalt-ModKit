@@ -95,12 +95,12 @@ namespace Asphalt.Events
 
         public static EventPatch RegisterPatch(Type patchType)
         {
-            if (patches.ContainsKey(patchType))
+            var patch = EventPatch.FromType(patchType);
+            if (patches.ContainsKey(patch.EventType))
             {
-                throw new ArgumentException($"The type {patchType.FullName} already has a patch registered!");
+                throw new ArgumentException($"The type {patch.EventType.FullName} already has a patch registered!");
             }
 
-            var patch = EventPatch.FromType(patchType);
             patch.Patch();
             patches.Add(patch.EventType, patch);
             return patch;
