@@ -14,15 +14,20 @@ namespace Asphalt.Events
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class EventHandlerAttribute : Attribute
     {
+        public bool AllowCancel { get; set; } = true;
         public EventPriority Priority { get; set; } = EventPriority.Normal;
-
-        public bool RunIfEventCancelled { get; set; } = false;
 
         public EventHandlerAttribute() { }
 
         public EventHandlerAttribute(EventPriority priority)
         {
-            this.Priority = priority;
+            Priority = priority;
+        }
+
+        public EventHandlerAttribute(EventPriority priority, bool allowCancel)
+        {
+            Priority = priority;
+            AllowCancel = allowCancel;
         }
     }
 }

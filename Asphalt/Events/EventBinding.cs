@@ -8,6 +8,6 @@ namespace Asphalt.Events
         public bool AllowCancel;
         public EventPriority Priority;
         public MethodInfo Handler;
-        public Type HandlerType => Handler.DeclaringType;
+        public object HandlerInstance;
     }
 }

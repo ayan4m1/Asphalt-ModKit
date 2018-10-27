@@ -9,7 +9,7 @@ namespace AsphaltEventTestPlugin
 {
     public class TestEventHandlers
     {
-        [EventHandler(EventPriority.Normal, RunIfEventCancelled = false)]
+        [EventHandler(EventPriority.Normal, AllowCancel = true)]
         public void OnPlayerMessage(PlayerSendMessageEvent evt)
         {
             // evt.Cancel = true;

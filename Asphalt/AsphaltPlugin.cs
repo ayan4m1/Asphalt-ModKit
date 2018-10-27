@@ -1,4 +1,6 @@
-﻿using Asphalt.Utils;
+﻿using Asphalt.Events;
+using Asphalt.Events.InventoryEvents;
+using Asphalt.Utils;
 using Eco.Core.Plugins.Interfaces;
 using Harmony;
 using System.IO;
@@ -11,9 +13,12 @@ namespace Asphalt
 
         static AsphaltPlugin()
         {
-            // Patch injections for default Services onEnable etc.
+            // apply service hook patches
             Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
             Harmony.PatchAll();
+
+            // register event emitters
+            PatchRegistry.RegisterPatches();
 
             if (File.Exists("dumpdlls.txt"))
             {

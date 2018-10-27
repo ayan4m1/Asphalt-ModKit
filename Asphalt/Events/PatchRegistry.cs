@@ -27,7 +27,7 @@ namespace Asphalt.Events
                     continue;
                 }
 
-                binding.Handler.Invoke(binding.HandlerType, new object[] { rawEvent });
+                binding.Handler.Invoke(binding.HandlerInstance, new object[] { rawEvent });
             }
         }
 
@@ -38,14 +38,45 @@ namespace Asphalt.Events
                 throw new ArgumentOutOfRangeException("eventType", $"The type {eventType.FullName} is not registered!");
             }
 
+            // this is a no-op if already patched
             patches[eventType].Patch();
 
-            if (handlers.ContainsKey(eventType))
+            if (!handlers.ContainsKey(eventType))
             {
                 handlers.Add(eventType, new List<EventBinding>());
             }
 
             handlers[eventType].Add(handler);
+        }
+
+        public static void RegisterHandlers(object handlers)
+        {
+            var type = handlers.GetType();
+            foreach (var method in type
+                .GetMethods()
+                .Where(EventExtensions.IsEventHandler))
+            {
+                var handlerInfo = method.GetCustomAttribute<EventHandlerAttribute>();
+                var argType = method.GetParameters()[0].ParameterType;
+
+                RegisterHandler(argType, new EventBinding()
+                {
+                    AllowCancel = handlerInfo.AllowCancel,
+                    Priority = handlerInfo.Priority,
+                    Handler = method,
+                    HandlerInstance = handlers
+                });
+            }
+        }
+
+        public static void RegisterHandlers(Assembly assembly)
+        {
+            foreach (var type in assembly
+                .GetTypes()
+                .Where(EventExtensions.HasEventHandler))
+            {
+                RegisterHandlers(type);
+            }
         }
 
         public static void UnregisterHandlers(Type eventType)
@@ -71,7 +102,7 @@ namespace Asphalt.Events
 
             var patch = EventPatch.FromType(patchType);
             patch.Patch();
-            patches.Add(patchType, patch);
+            patches.Add(patch.EventType, patch);
             return patch;
         }
 
@@ -88,7 +119,7 @@ namespace Asphalt.Events
 
         public static void RegisterPatches()
         {
-            RegisterPatches(Assembly.GetCallingAssembly());
+            RegisterPatches(typeof(PatchRegistry).Assembly);
         }
 
         public static void UnregisterPatch(Type patchType)
