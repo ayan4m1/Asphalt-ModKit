@@ -10,6 +10,7 @@ namespace Asphalt.Tests
         {
             var plugin = new AsphaltPlugin();
             Assert.IsNotNull(plugin);
+            Assert.IsNotNull(AsphaltPlugin.Harmony);
             Assert.True(plugin.GetStatus() == "Initialized!");
         }
     }
