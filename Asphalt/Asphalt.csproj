@@ -136,6 +136,9 @@
     <PackageReference Include="EcoServer">
       <Version>0.7.7.2</Version>
     </PackageReference>
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task">
+      <Version>2.0.16</Version>
+    </PackageReference>
     <PackageReference Include="Lib.Harmony">
       <Version>1.2.0.1</Version>
     </PackageReference>
@@ -145,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Asphalt.nuspec" />
+    <None Include="ILRepack.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
