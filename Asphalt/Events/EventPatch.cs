@@ -45,7 +45,7 @@ namespace Asphalt.Events
         public void Patch()
         {
             if (Patched) return;
-            AsphaltPlugin.Harmony.Patch(PatchSite, Prefix, Postfix);
+            Asphalt.Harmony.Patch(PatchSite, Prefix, Postfix);
             Patched = true;
         }
 
@@ -53,8 +53,8 @@ namespace Asphalt.Events
         {
             if (!Patched) return;
             // using .Unpatch(PatchSite, HarmonyPatchType.All) does not work
-            AsphaltPlugin.Harmony.Unpatch(PatchSite, Prefix?.method);
-            AsphaltPlugin.Harmony.Unpatch(PatchSite, Postfix?.method);
+            Asphalt.Harmony.Unpatch(PatchSite, Prefix?.method);
+            Asphalt.Harmony.Unpatch(PatchSite, Postfix?.method);
             Patched = false;
         }
     }

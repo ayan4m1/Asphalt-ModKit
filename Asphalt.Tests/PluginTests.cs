@@ -8,9 +8,9 @@ namespace Asphalt.Tests
         [Test]
         public void CanInitialize()
         {
-            var plugin = new AsphaltPlugin();
+            var plugin = new Asphalt();
             Assert.IsNotNull(plugin);
-            Assert.IsNotNull(AsphaltPlugin.Harmony);
+            Assert.IsNotNull(Asphalt.Harmony);
             Assert.True(plugin.GetStatus() == "Initialized!");
         }
     }

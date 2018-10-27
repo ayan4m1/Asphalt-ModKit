@@ -9,7 +9,7 @@ namespace Asphalt.Events
         private static readonly Type argsType = typeof(EventArgs);
         private static readonly Type emitterType = typeof(EventEmitter<>);
         private static readonly Type patchSiteType = typeof(EventPatchSite);
-        private static readonly Type eventHandlerType = typeof(EventHandlerAttribute);
+        private static readonly Type eventHandlerType = typeof(EventHandler);
 
         public static bool HasEventHandler(this Type type)
         {

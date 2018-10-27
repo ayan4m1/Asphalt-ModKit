@@ -38,8 +38,8 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asphalt.cs" />
     <Compile Include="AsphaltPlugin.cs" />
-    <Compile Include="AsphaltPluginAttribute.cs" />
     <Compile Include="Chat\PageableList\IPageableList.cs" />
     <Compile Include="Chat\PageableList\PageableList.cs" />
     <Compile Include="Events\AtomicActionEventPatchSite.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Events\WorldObjectEvents\RubbleSpawnEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectChangeTextEvent.cs" />
     <Compile Include="Events\EventBinding.cs" />
-    <Compile Include="Events\EventHandlerAttribute.cs" />
+    <Compile Include="Events\EventHandler.cs" />
     <Compile Include="Events\EventPriority.cs" />
     <Compile Include="Events\InventoryEvents\InventoryChangeSelectedSlotEvent.cs" />
     <Compile Include="Events\InventoryEvents\InventoryMoveItemEvent.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Events\WorldObjectEvents\WorldObjectNameChangedEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectOperatingChangedEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectPickupEvent.cs" />
-    <Compile Include="InjectAttribute.cs" />
+    <Compile Include="Service\Inject.cs" />
     <Compile Include="Service\IDisableable.cs" />
     <Compile Include="Service\IReloadable.cs" />
     <Compile Include="Service\KeyDefaultValue.cs" />

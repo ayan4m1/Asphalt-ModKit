@@ -39,7 +39,7 @@ namespace Asphalt.Utils
             if (pMethodToReplace == null)
                 throw new ArgumentNullException(nameof(pMethodToReplace));
 
-            AsphaltPlugin.Harmony.Patch(
+            Asphalt.Harmony.Patch(
                 pMethodToReplace,
                 new HarmonyMethod(pHelperType.GetMethod("Prefix", PUBLIC_STATIC)),
                 new HarmonyMethod(pHelperType.GetMethod("Postfix", PUBLIC_STATIC))

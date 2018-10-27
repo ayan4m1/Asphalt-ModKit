@@ -1,38 +1,15 @@
-﻿using Asphalt.Events;
-using Asphalt.Utils;
-using Eco.Core.Plugins.Interfaces;
-using Harmony;
-using System.IO;
+﻿using System;
 
 namespace Asphalt
 {
-    public class AsphaltPlugin : IModKitPlugin
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class AsphaltPlugin : Attribute
     {
-        public static HarmonyInstance Harmony { get; protected set; }
+        public string ModName { get; set; }
 
-        static AsphaltPlugin()
+        public AsphaltPlugin(string name = null)
         {
-            // apply service hook patches
-            Harmony = HarmonyInstance.Create("com.eco.mods.asphalt");
-            Harmony.PatchAll();
-
-            // register event emitters
-            PatchRegistry.RegisterPatches();
-
-            if (File.Exists("dumpdlls.txt"))
-            {
-                DllDumpUtils.Dump();
-            }
-        }
-
-        public string GetStatus()
-        {
-            return "Initialized!";
-        }
-
-        public override string ToString()
-        {
-            return "Asphalt ModKit";
+            ModName = name;
         }
     }
 }
