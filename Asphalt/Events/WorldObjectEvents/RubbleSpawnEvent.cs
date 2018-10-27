@@ -21,9 +21,9 @@ namespace Asphalt.Events.WorldObjectEvents
     [EventPatchSite(typeof(EcoObjectManager), "Add", CommonBindingFlags.Static)]
     internal class RubbleSpawnEventEmitter : EventEmitter<RubbleSpawnEvent>
     {
-        public static void Postfix(ref IEcoObject obj)
+        public static void Postfix(ref IEcoObject ecoObject)
         {
-            if (!(obj is RubbleObject rubble))
+            if (!(ecoObject is RubbleObject rubble))
                 return;
 
             var evt = new RubbleSpawnEvent(ref rubble);
@@ -31,7 +31,7 @@ namespace Asphalt.Events.WorldObjectEvents
 
             if (evt.Cancel)
             {
-                typeof(RubbleObject).GetMethod("Destroy", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(rubble, new object[] { });
+                typeof(RubbleObject).GetMethod("Destroy", CommonBindingFlags.PrivateInstance).Invoke(rubble, new object[] { });
             }
         }
     }

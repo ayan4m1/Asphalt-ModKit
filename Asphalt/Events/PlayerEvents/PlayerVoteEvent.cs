@@ -1,5 +1,6 @@
 ﻿using Eco.Core.Utils.AtomicAction;
 using Eco.Gameplay.Players;
+using Eco.Gameplay.Stats.ConcretePlayerActions;
 using Eco.Shared.Localization;
 using System;
 using System.ComponentModel;
@@ -15,7 +16,8 @@ namespace Asphalt.Events.PlayerEvents
             User = user;
         }
     }
-
+    
+    [AtomicActionEventPatchSite(typeof(VotePlayerActionManager))]
     internal class PlayerVoteEventEmitter : EventEmitter<PlayerVoteEvent>
     {
         public static bool Prefix(ref User user, ref IAtomicAction __result)

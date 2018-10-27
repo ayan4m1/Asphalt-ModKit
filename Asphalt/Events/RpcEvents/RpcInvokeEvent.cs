@@ -24,9 +24,9 @@ namespace Asphalt.Events.RpcEvents
     [EventPatchSite(typeof(RPCManager), "InvokeOn", CommonBindingFlags.Static, 5)]
     internal class RpcInvokeEventEmitter : EventEmitter<RpcInvokeEvent>
     {
-        public static bool Prefix(ref string methodName, ref BSONObject bson, object __result)
+        public static bool Prefix(ref string methodname, ref BSONObject bson, object __result)
         {
-            var evt = new RpcInvokeEvent(methodName, bson);
+            var evt = new RpcInvokeEvent(methodname, bson);
             Emit(ref evt);
 
             if (evt.Cancel)

@@ -22,9 +22,9 @@ namespace Asphalt.Events.PlayerEvents
     [EventPatchSite(typeof(User), "Login")]
     internal class PlayerLoginEventEmitter : EventEmitter<PlayerLoginEvent>
     {
-        public static void Prefix(Player player, INetClient netClient)
+        public static void Prefix(Player player, INetClient client)
         {
-            var evt = new PlayerLoginEvent(player, netClient);
+            var evt = new PlayerLoginEvent(player, client);
             Emit(evt);
         }
     }

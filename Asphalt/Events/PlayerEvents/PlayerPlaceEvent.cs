@@ -26,9 +26,9 @@ namespace Asphalt.Events.PlayerEvents
     [AtomicActionEventPatchSite(typeof(PlacePlayerActionManager))]
     internal class PlayerPlaceEventEmitter : EventEmitter<PlayerPlaceEvent>
     {
-        public static bool Prefix(ref Player player, ref BlockItem item, ref Vector3i position, ref IAtomicAction __result)
+        public static bool Prefix(ref Player player, ref BlockItem placedItem, ref Vector3i position, ref IAtomicAction __result)
         {
-            var evt = new PlayerPlaceEvent(ref player, ref item, ref position);
+            var evt = new PlayerPlaceEvent(ref player, ref placedItem, ref position);
             Emit(ref evt);
 
             if (evt.Cancel)
