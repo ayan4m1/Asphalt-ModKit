@@ -11,6 +11,9 @@ using System;
 
 namespace Asphalt.Events
 {
+    /// <summary>
+    /// Indicates that an event binding should be established on the targeted method.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class EventHandlerAttribute : Attribute
     {
