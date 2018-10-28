@@ -11,7 +11,7 @@ namespace AsphaltEventTestPlugin
         {
             TestListener = new TestEventHandlers();
 
-            PatchRegistry.RegisterHandlers(TestListener);
+            EventHandlerRegistry.RegisterAll(TestListener);
         }
 
         public string GetStatus()

@@ -46,6 +46,7 @@
     <Compile Include="Events\CommonBindingFlags.cs" />
     <Compile Include="Events\EventEmitter.cs" />
     <Compile Include="Events\EventExtensions.cs" />
+    <Compile Include="Events\EventHandlerRegistry.cs" />
     <Compile Include="Events\EventPatchSiteAttribute.cs" />
     <Compile Include="Events\EventPriorityComparer.cs" />
     <Compile Include="Events\PatchRegistry.cs" />
