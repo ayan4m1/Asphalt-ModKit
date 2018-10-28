@@ -17,13 +17,13 @@ namespace Asphalt.Utils
     public class InvUtils
     {
         /// <summary>
-        /// Move items from a worldObjetc iwht a inventory to a world object with a inventory
+        /// Move items from a worldObject with an inventory to another world object with an inventory
         /// </summary>
         /// <param name="input">Input world object as chest or stockpile</param>
         /// <param name="output">Output world object as chest or stockpile</param>
         /// <param name="qty">The quantity moved (can't move more than a stack)</param>
-        /// <param name="filteredItemInput">List of item type that can be taken in input (null means take all type)</param>
-        /// <param name="filteredItemOutput">List of item type that can be donne to output(null means take all type)</param>
+        /// <param name="filteredItemInput">List of item type that can be taken from input (null means accept all)</param>
+        /// <param name="filteredItemOutput">List of item type that can be put into output (null means accept all)</param>
         /// <returns></returns>
         public static bool MoveItemFromToInventory(WorldObject input, WorldObject output, int qty = 1, List<Type> filteredItemInput = null, List<Type> filteredItemOutput = null)
         {
