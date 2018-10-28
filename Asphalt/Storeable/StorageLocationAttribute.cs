@@ -8,12 +8,12 @@ namespace Asphalt.Storeable
     {
         public string Location { get; protected set; }
 
-        public StorageLocationAttribute(string pStorageLocation)
+        public StorageLocationAttribute(string location)
         {
-            if (!string.IsNullOrEmpty(Path.GetExtension(pStorageLocation)))
-                throw new ArgumentException($"{nameof(pStorageLocation)} should never be a filename with an extension. Please provide only the Location of an Storage (e.g. the filename without extension)");
+            if (!string.IsNullOrEmpty(Path.GetExtension(location)))
+                throw new ArgumentException($"{nameof(location)} should never be a filename with an extension. Please provide only the name of a storage object (i.e. the filename without extension)");
 
-            Location = pStorageLocation;
+            Location = location;
         }
     }
 }
