@@ -10,42 +10,6 @@ namespace Asphalt.Utils
     //You can also call this class magic ;)
     public static class InjectionUtils
     {
-        public const BindingFlags PUBLIC_STATIC = BindingFlags.Static | BindingFlags.Public;
-        public const BindingFlags PUBLIC_INSTANCE = BindingFlags.Instance | BindingFlags.Public;
-        public const BindingFlags NON_PUBLIC_INSTANCE = BindingFlags.Instance | BindingFlags.NonPublic;
-
-        public static void InstallCreateAtomicAction(Type pTypeToReplace, Type pHelperType)
-        {
-            InstallWithOriginalHelperPublicInstance(pTypeToReplace, pHelperType, "CreateAtomicAction");
-        }
-
-        public static void InstallWithOriginalHelperPublicStatic(Type pTypeToReplace, Type pHelperType, string pMethodName)
-        {
-            Install(pTypeToReplace.GetMethod(pMethodName, PUBLIC_STATIC), pHelperType);
-        }
-
-        public static void InstallWithOriginalHelperPublicInstance(Type pTypeToReplace, Type pHelperType, string pMethodName)
-        {
-            Install(pTypeToReplace.GetMethod(pMethodName, PUBLIC_INSTANCE), pHelperType);
-        }
-
-        public static void InstallWithOriginalHelperNonPublicInstance(Type pTypeToReplace, Type pHelperType, string pMethodName)
-        {
-            Install(pTypeToReplace.GetMethod(pMethodName, NON_PUBLIC_INSTANCE), pHelperType);
-        }
-
-        public static void Install(MethodInfo pMethodToReplace, Type pHelperType)
-        {
-            if (pMethodToReplace == null)
-                throw new ArgumentNullException(nameof(pMethodToReplace));
-
-            Asphalt.Harmony.Patch(
-                pMethodToReplace,
-                new HarmonyMethod(pHelperType.GetMethod("Prefix", PUBLIC_STATIC)),
-                new HarmonyMethod(pHelperType.GetMethod("Postfix", PUBLIC_STATIC))
-            );
-        }
-
         public static IEnumerable<PropertyFieldInfo> GetPropertyFieldInfos(Type pServerPlugin, Type pType)
         {
             return pServerPlugin.GetProperties().Where(x => x.PropertyType == pType).Select(x => new PropertyFieldInfo(x))
