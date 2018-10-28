@@ -9,7 +9,7 @@ namespace Asphalt.Events
     /// Indicates that a Harmony patch should be installed using the targeted class as its source.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class EventPatchSite : Attribute
+    public class EventPatchSiteAttribute : Attribute
     {
         private static readonly List<FieldInfo> bindingFlags = typeof(CommonBindingFlags).GetFields(CommonBindingFlags.Static).ToList();
 
@@ -20,7 +20,7 @@ namespace Asphalt.Events
         /// </summary>
         /// <param name="type">Type that contains the method to bind</param>
         /// <param name="methodName">Name of the method to bind</param>
-        public EventPatchSite(Type type, string methodName)
+        public EventPatchSiteAttribute(Type type, string methodName)
         {
             PatchSite = HuntForMethod(type, methodName) ?? throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}"); ;
         }
@@ -31,7 +31,7 @@ namespace Asphalt.Events
         /// <param name="type">Type that contains the method to bind</param>
         /// <param name="methodName">Name of the method to bind</param>
         /// <param name="flags">BindingFlags describing the method to bind</param>
-        public EventPatchSite(Type type, string methodName, BindingFlags flags)
+        public EventPatchSiteAttribute(Type type, string methodName, BindingFlags flags)
         {
             PatchSite = type.GetMethod(methodName, flags) ?? throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName}");
         }
@@ -43,7 +43,7 @@ namespace Asphalt.Events
         /// <param name="methodName">Name of the method to bind</param>
         /// <param name="flags">BindingFlags describing the method to bind</param>
         /// <param name="paramCount">Number of parameters in the method to bind</param>
-        public EventPatchSite(Type type, string methodName, BindingFlags flags, int paramCount)
+        public EventPatchSiteAttribute(Type type, string methodName, BindingFlags flags, int paramCount)
         {
             var method = type.GetMethods(flags).FirstOrDefault(mi => mi.Name == methodName && mi.GetParameters().Length == paramCount);
             PatchSite = method ?? throw new ArgumentException($"Could not find patch site for {type.FullName}.{methodName} with {paramCount} parameters!");

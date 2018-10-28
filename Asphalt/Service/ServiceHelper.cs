@@ -127,7 +127,7 @@ namespace Asphalt.Service
         {
             string folder = pServerPlugin.ToString();
 
-            AsphaltPlugin att = ((AsphaltPlugin)pServerPlugin.GetCustomAttribute(typeof(AsphaltPlugin)));
+            AsphaltPluginAttribute att = ((AsphaltPluginAttribute)pServerPlugin.GetCustomAttribute(typeof(AsphaltPluginAttribute)));
             if (IsAsphaltPlugin(pServerPlugin) && att.ModName != null)
                 folder = att.ModName;
 
@@ -139,7 +139,7 @@ namespace Asphalt.Service
 
         public static bool IsAsphaltPlugin(Type pType)
         {
-            return pType.GetCustomAttribute(typeof(AsphaltPlugin)) != null;
+            return pType.GetCustomAttribute(typeof(AsphaltPluginAttribute)) != null;
         }
     }
 }

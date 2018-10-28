@@ -12,7 +12,7 @@ namespace Asphalt.Tests
         [Test]
         public void FindSimpleSite()
         {
-            new EventPatchSite(thisType, "Test");
+            new EventPatchSiteAttribute(thisType, "Test");
         }
 
         [Test]
@@ -20,14 +20,14 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                new EventPatchSite(thisType, "NotAMethod");
+                new EventPatchSiteAttribute(thisType, "NotAMethod");
             });
         }
 
         [Test]
         public void FindSpecificSite()
         {
-            new EventPatchSite(thisType, "StaticTest", CommonBindingFlags.Static);
+            new EventPatchSiteAttribute(thisType, "StaticTest", CommonBindingFlags.Static);
         }
 
         [Test]
@@ -35,14 +35,14 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                new EventPatchSite(thisType, "StaticTest", CommonBindingFlags.Instance);
+                new EventPatchSiteAttribute(thisType, "StaticTest", CommonBindingFlags.Instance);
             });
         }
 
         [Test]
         public void FindParameterCountSite()
         {
-            new EventPatchSite(thisType, "TestParams", CommonBindingFlags.Instance, 3);
+            new EventPatchSiteAttribute(thisType, "TestParams", CommonBindingFlags.Instance, 3);
         }
 
         [Test]
@@ -50,14 +50,14 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                new EventPatchSite(thisType, "TestParams", CommonBindingFlags.Instance, 1);
+                new EventPatchSiteAttribute(thisType, "TestParams", CommonBindingFlags.Instance, 1);
             });
         }
 
         [Test]
         public void FindAtomicActionSite()
         {
-            new AtomicActionEventPatchSite(thisType);
+            new AtomicActionEventPatchSiteAttribute(thisType);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                new AtomicActionEventPatchSite(typeof(object));
+                new AtomicActionEventPatchSiteAttribute(typeof(object));
             });
         }
 

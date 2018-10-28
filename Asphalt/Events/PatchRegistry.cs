@@ -56,7 +56,7 @@ namespace Asphalt.Events
                 .GetMethods()
                 .Where(EventExtensions.IsEventHandler))
             {
-                var handlerInfo = method.GetCustomAttribute<EventHandler>();
+                var handlerInfo = method.GetCustomAttribute<EventHandlerAttribute>();
                 var argType = method.GetParameters()[0].ParameterType;
 
                 RegisterHandler(argType, new EventBinding()

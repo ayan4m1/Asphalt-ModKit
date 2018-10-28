@@ -15,19 +15,19 @@ namespace Asphalt.Events
     /// Indicates that an event binding should be established on the targeted method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public class EventHandler : Attribute
+    public class EventHandlerAttribute : Attribute
     {
         public bool AllowCancel { get; set; } = true;
         public EventPriority Priority { get; set; } = EventPriority.Normal;
 
-        public EventHandler() { }
+        public EventHandlerAttribute() { }
 
-        public EventHandler(EventPriority priority)
+        public EventHandlerAttribute(EventPriority priority)
         {
             Priority = priority;
         }
 
-        public EventHandler(EventPriority priority, bool allowCancel)
+        public EventHandlerAttribute(EventPriority priority, bool allowCancel)
         {
             Priority = priority;
             AllowCancel = allowCancel;

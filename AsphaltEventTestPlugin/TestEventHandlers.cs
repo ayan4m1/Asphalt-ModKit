@@ -5,7 +5,6 @@ using Asphalt.Events.RpcEvents;
 using Asphalt.Events.WorldEvents;
 using Asphalt.Events.WorldObjectEvents;
 using System;
-using EventHandler = Asphalt.Events.EventHandler;
 
 namespace AsphaltEventTestPlugin
 {

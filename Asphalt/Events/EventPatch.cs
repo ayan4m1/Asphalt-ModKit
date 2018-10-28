@@ -14,7 +14,7 @@ namespace Asphalt.Events
 
         public static EventPatch FromType(Type patchClass)
         {
-            var patchSiteAttribute = patchClass.GetCustomAttribute<EventPatchSite>();
+            var patchSiteAttribute = patchClass.GetCustomAttribute<EventPatchSiteAttribute>();
             if (patchSiteAttribute == null)
             {
                 throw new ArgumentNullException("EventPatchSite", $"EventPatchSite attribute missing on {patchClass.FullName}");
