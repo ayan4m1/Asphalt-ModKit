@@ -26,7 +26,7 @@ namespace Asphalt.Service
             FieldInfo = pType.GetField(pName);
 
             if (PropertyInfo == null && FieldInfo == null)
-                throw new ArgumentNullException($"No public Field or Property with name {pName} found in type {pType.ToString()}");
+                throw new ArgumentException($"No public Field or Property with name {pName} found in type {pType.FullName}");
         }
 
         public bool HasInjectAttribute()
