@@ -50,7 +50,7 @@ namespace Asphalt.Tests
         [Test]
         public void CannotRegisterPatchLackingSite()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 PatchRegistry.RegisterPatch(typeof(PatchRegistryTestWithoutPatchSite));
             });

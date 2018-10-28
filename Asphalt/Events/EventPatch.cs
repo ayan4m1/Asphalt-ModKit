@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace Asphalt.Events
 {
-    public class EventPatch
+    public struct EventPatch
     {
-        public bool Patched { get; private set; } = false;
+        public bool Patched { get; private set; }
         public Type EventType { get; private set; }
         public MethodBase PatchSite { get; private set; }
         public HarmonyMethod Prefix { get; private set; }
@@ -17,7 +17,14 @@ namespace Asphalt.Events
             var patchSiteAttribute = patchClass.GetCustomAttribute<EventPatchSiteAttribute>();
             if (patchSiteAttribute == null)
             {
-                throw new ArgumentNullException("EventPatchSite", $"EventPatchSite attribute missing on {patchClass.FullName}");
+                throw new ArgumentException($"EventPatchSite attribute missing on {patchClass.FullName}!");
+            }
+
+            var emitterType = patchClass.BaseType;
+            var genericTypes = emitterType.GetGenericArguments();
+            if (genericTypes == null || genericTypes.Length != 1)
+            {
+                throw new ArgumentException($"{patchClass.FullName} does not implement EventEmitter<E>!");
             }
 
             var prefixSite = patchClass.GetMethod("Prefix", CommonBindingFlags.Static);
@@ -26,15 +33,9 @@ namespace Asphalt.Events
             var postfixSite = patchClass.GetMethod("Postfix", CommonBindingFlags.Static);
             var postfix = (postfixSite != null) ? new HarmonyMethod(postfixSite) : null;
 
-            var emitterType = patchClass.BaseType;
-            var genericTypes = emitterType.GetGenericArguments();
-            if (genericTypes == null || genericTypes.Length != 1)
-            {
-                throw new InvalidOperationException("Asked to generate an EventPatch from an object which does not have generic type arguments!");
-            }
-
             return new EventPatch()
             {
+                Patched = false,
                 EventType = genericTypes[0],
                 PatchSite = patchSiteAttribute.PatchSite,
                 Prefix = prefix,

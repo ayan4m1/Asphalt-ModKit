@@ -47,16 +47,8 @@ namespace Asphalt.Events
                 .GetMethods()
                 .Where(EventExtensions.IsEventHandler))
             {
-                var handlerInfo = method.GetCustomAttribute<EventHandlerAttribute>();
-                var argType = method.GetParameters()[0].ParameterType;
-
-                Register(argType, new EventBinding()
-                {
-                    AllowCancel = handlerInfo.AllowCancel,
-                    Priority = handlerInfo.Priority,
-                    Handler = method,
-                    HandlerInstance = handlers
-                });
+                var binding = EventBinding.FromHandler(handlers, method);
+                Register(binding.EventType, binding);
             }
         }
 
