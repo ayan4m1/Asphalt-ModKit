@@ -31,7 +31,7 @@ namespace Asphalt.Service
 
         public bool HasInjectAttribute()
         {
-            return HasAttribute(typeof(Inject));
+            return HasAttribute(typeof(InjectAttribute));
         }
 
         public bool HasDefaultValuesAttribute()

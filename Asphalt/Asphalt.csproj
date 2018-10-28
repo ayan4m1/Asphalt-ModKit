@@ -91,7 +91,7 @@
     <Compile Include="Events\WorldObjectEvents\WorldObjectNameChangedEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectOperatingChangedEvent.cs" />
     <Compile Include="Events\WorldObjectEvents\WorldObjectPickupEvent.cs" />
-    <Compile Include="Service\Inject.cs" />
+    <Compile Include="Service\InjectAttribute.cs" />
     <Compile Include="Service\IDisableable.cs" />
     <Compile Include="Service\IReloadable.cs" />
     <Compile Include="Service\KeyDefaultValue.cs" />
