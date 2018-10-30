@@ -12,13 +12,13 @@ namespace Asphalt.Tests
         [TearDown]
         public void ResetRegistry()
         {
-            PatchRegistry.Reset();
+            EventPatchRegistry.UnregisterAll();
         }
 
         [Test]
         public void CanRegisterPatch()
         {
-            PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
+            EventPatchRegistry.Register(typeof(PatchRegistryTestOne));
         }
 
         [Test]
@@ -26,16 +26,16 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                var firstPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
-                var secondPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
+                var firstPatch = EventPatchRegistry.Register(typeof(PatchRegistryTestOne));
+                var secondPatch = EventPatchRegistry.Register(typeof(PatchRegistryTestOne));
             });
         }
 
         [Test]
         public void CanRegisterMultiplePatches()
         {
-            var firstPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestOne));
-            var secondPatch = PatchRegistry.RegisterPatch(typeof(PatchRegistryTestTwo));
+            var firstPatch = EventPatchRegistry.Register(typeof(PatchRegistryTestOne));
+            var secondPatch = EventPatchRegistry.Register(typeof(PatchRegistryTestTwo));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                PatchRegistry.RegisterPatch(typeof(PatchRegistryTestWithInvalidPatchSite));
+                EventPatchRegistry.Register(typeof(PatchRegistryTestWithInvalidPatchSite));
             });
         }
 
@@ -52,7 +52,7 @@ namespace Asphalt.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                PatchRegistry.RegisterPatch(typeof(PatchRegistryTestWithoutPatchSite));
+                EventPatchRegistry.Register(typeof(PatchRegistryTestWithoutPatchSite));
             });
         }
     }

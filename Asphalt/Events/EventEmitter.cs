@@ -6,12 +6,12 @@ namespace Asphalt.Events
     {
         protected static void Emit(E rawEvent)
         {
-            EventHandlerRegistry.Handle(ref rawEvent);
+            EventMappingRegistry.Handle(ref rawEvent);
         }
 
         protected static void Emit(ref E rawEvent)
         {
-            EventHandlerRegistry.Handle(ref rawEvent);
+            EventMappingRegistry.Handle(ref rawEvent);
         }
     }
 }

@@ -5,13 +5,13 @@ using System.Reflection;
 
 namespace Asphalt.Events
 {
-    public static class PatchRegistry
+    public static class EventPatchRegistry
     {
         private static readonly Dictionary<Type, EventPatch> patches = new Dictionary<Type, EventPatch>();
 
-        public static EventPatch RegisterPatch(Type patchType)
+        public static EventPatch Register(Type patchType)
         {
-            var patch = EventPatch.FromType(patchType);
+            var patch = patchType.GetEventPatch();
             if (patches.ContainsKey(patch.EventType))
             {
                 throw new ArgumentException($"The type {patch.EventType.FullName} already has a patch registered!");
@@ -22,23 +22,20 @@ namespace Asphalt.Events
             return patch;
         }
 
-        public static void RegisterPatches(Assembly assembly)
+        public static void RegisterAll(Assembly assembly)
         {
-            foreach (var type in assembly
-                .GetTypes()
-                .Where(EventExtensions.IsEventEmitter)
-                .Where(type => !patches.ContainsKey(type)))
+            foreach (var type in assembly.GetEventEmitters())
             {
-                RegisterPatch(type);
+                Register(type);
             }
         }
 
-        public static void RegisterPatches()
+        public static void RegisterInternal()
         {
-            RegisterPatches(typeof(PatchRegistry).Assembly);
+            RegisterAll(typeof(EventPatchRegistry).Assembly);
         }
 
-        public static void UnregisterPatch(Type patchType)
+        public static void Unregister(Type patchType)
         {
             if (!patches.ContainsKey(patchType))
             {
@@ -48,23 +45,15 @@ namespace Asphalt.Events
             patches.Remove(patchType);
         }
 
-        public static void UnregisterPatches(Assembly assembly)
+        public static void UnregisterAll(Assembly assembly)
         {
-            foreach (var type in assembly
-                .GetTypes()
-                .Where(EventExtensions.IsEventEmitter)
-                .Where(type => patches.ContainsKey(type)))
+            foreach (var type in assembly.GetEventEmitters())
             {
-                UnregisterPatch(type);
+                Unregister(type);
             }
         }
 
-        public static void UnregisterPatches()
-        {
-            UnregisterPatches(Assembly.GetCallingAssembly());
-        }
-
-        public static void Reset()
+        public static void UnregisterAll()
         {
             foreach (var (type, patch) in patches.Select(x => (x.Key, x.Value)))
             {

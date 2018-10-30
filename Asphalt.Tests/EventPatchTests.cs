@@ -15,7 +15,7 @@ namespace Asphalt.Tests
         [Test]
         public void CanPatchAndUnpatchMethods()
         {
-            var patch = EventPatch.FromType(typeof(EventPatchTest));
+            var patch = typeof(EventPatchTest).GetEventPatch();
             Assert.Throws<AssertionException>(TestMethod);
             patch.Patch();
             Assert.Throws<SuccessException>(TestMethod);

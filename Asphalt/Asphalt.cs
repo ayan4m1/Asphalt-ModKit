@@ -32,7 +32,7 @@ namespace Asphalt
         public void Initialize(TimedTask timer)
         {
             // register event emitters
-            PatchRegistry.RegisterPatches();
+            EventPatchRegistry.RegisterInternal();
 
             if (File.Exists("dumpdlls.txt"))
             {
