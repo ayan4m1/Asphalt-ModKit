@@ -36,6 +36,11 @@ namespace Asphalt.Events
             }
         }
 
+        public static bool IsRegistered(Type type)
+        {
+            return mappings.ContainsKey(type);
+        }
+
         public static void Register(EventMapping mapping)
         {
             var eventType = mapping.EventType;

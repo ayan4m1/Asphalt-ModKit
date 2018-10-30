@@ -47,10 +47,15 @@ namespace Asphalt.Events
         {
             if (!IsEventEmitter(type))
             {
-                throw new ArgumentException("Asked to generate an event patch from a non-emitter! Ensure the class extends from EventEmitter<E> and contains an EventPatchSite attribute.");
+                throw new ArgumentException("Asked to generate an event patch from a non-emitter! Ensure the class extends from EventEmitter<E>.");
             }
 
             var patchSiteAttribute = type.GetCustomAttribute<EventPatchSiteAttribute>();
+            if (patchSiteAttribute == null)
+            {
+                throw new ArgumentException("Asked to generate an event patch from a class without an EventPatchSite attribute!");
+            }
+
             var emitterType = type.BaseType;
             var eventType = emitterType.GetGenericArguments()[0];
 
@@ -73,11 +78,6 @@ namespace Asphalt.Events
         private static bool IsEventEmitter(Type type)
         {
             if (type.BaseType == null || type == emitterType)
-            {
-                return false;
-            }
-
-            if (type.GetCustomAttribute(patchSiteType) == null)
             {
                 return false;
             }

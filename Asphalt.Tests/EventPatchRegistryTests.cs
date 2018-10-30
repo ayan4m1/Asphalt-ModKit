@@ -7,7 +7,7 @@ using System;
 namespace Asphalt.Tests
 {
     [TestFixture]
-    public class PatchRegistryTests
+    public class EventPatchRegistryTests
     {
         [TearDown]
         public void ResetRegistry()
