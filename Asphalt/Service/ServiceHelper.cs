@@ -55,11 +55,11 @@ namespace Asphalt.Service
             foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IStorage)))
                 Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IStorage)), pfi);
 
-            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IStorageCollection)))
-                Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IStorageCollection)), pfi);
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IStorageContainer)))
+                Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IStorageContainer)), pfi);
 
-            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IUserStorageCollection)))
-                Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IUserStorageCollection)), pfi);
+            foreach (PropertyFieldInfo pfi in InjectionUtils.GetPropertyFieldInfos(pServerPlugin, typeof(IUserStorageContainer)))
+                Inject(pServerPlugin, StorageFactory.GetStorageFactory(pServerPlugin, typeof(IUserStorageContainer)), pfi);
         }
 
         private static void InjectPermissions(Type pServerPlugin, PropertyFieldInfo pfi)

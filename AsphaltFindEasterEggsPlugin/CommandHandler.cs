@@ -21,7 +21,7 @@ namespace AsphaltFindEasterEggsPlugin
             if (!AsphaltFindEasterEggsPlugin.PermissionChecker.CheckPermission(user, "easteregg.collect"))  //CheckPermission will notify the user if he doesn't have permission
                 return;
 
-            IStorage userStorage = AsphaltFindEasterEggsPlugin.CollectedEggsStorage.GetStorage(user);
+            IStorage userStorage = AsphaltFindEasterEggsPlugin.CollectedEggsStorage.GetUserStorage(user);
 
             int collectedEggs = userStorage.GetInt("collectedEggs"); //if no value was stored before, this will return 0
 

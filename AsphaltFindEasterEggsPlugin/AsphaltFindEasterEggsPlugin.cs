@@ -16,7 +16,7 @@ namespace AsphaltFindEasterEggsPlugin
 
         [Inject]
         [StorageLocation("CollectedEggsStorage")]
-        public static IUserStorageCollection CollectedEggsStorage { get; set; }
+        public static IUserStorageContainer CollectedEggsStorage { get; set; }
 
         [Inject]
         public static IPermissionService PermissionChecker { get; set; }

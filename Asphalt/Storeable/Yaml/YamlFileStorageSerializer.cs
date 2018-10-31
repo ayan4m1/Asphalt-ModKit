@@ -1,23 +1,26 @@
 ﻿using Asphalt.Storeable.CommonFileStorage;
-using System.Collections.Generic;
+using SharpYaml.Serialization;
 
 namespace Asphalt.Storeable.Yaml
 {
-    public class YamlFileStorageSerializer : IFileStorageSerializer
+    public class YamlFileStorageSerializer : IConfigurationSerializer
     {
-        public Dictionary<string, object> Deserialize(string pText)
+        private static Serializer serializer = new Serializer(new SerializerSettings()
         {
-            return YamlSerializationHelper.Serializer.Deserialize<Dictionary<string, object>>(pText);
+            EmitShortTypeName = true,
+            EmitAlias = false
+        });
+
+        public string FileExtension => "yaml";
+
+        public dynamic Deserialize(string rawConfiguration)
+        {
+            return serializer.Deserialize(rawConfiguration);
         }
 
-        public string GetFileExtension()
+        public string Serialize(dynamic configuration)
         {
-            return ".yaml";
-        }
-
-        public string Serialize(Dictionary<string, object> pObject)
-        {
-            return YamlSerializationHelper.Serializer.Serialize(pObject);
+            return serializer.Serialize(configuration);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Asphalt.Storeable.CommonFileStorage
 {
     public class FilePermissionStorage : FileStorage, IPermissionService
     {
-        public FilePermissionStorage(IFileStorageSerializer pSerializer, string pFileName, IDictionary<string, object> pDefaultValues = null, bool pSaveDefaultValues = false) : base(pSerializer, pFileName, pDefaultValues, pSaveDefaultValues)
+        public FilePermissionStorage(IConfigurationSerializer pSerializer, string pFileName, IDictionary<string, object> pDefaultValues = null, bool pSaveDefaultValues = false) : base(pSerializer, pFileName, pDefaultValues, pSaveDefaultValues)
         {
         }
 

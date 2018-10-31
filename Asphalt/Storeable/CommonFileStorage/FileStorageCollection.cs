@@ -3,16 +3,16 @@ using System.IO;
 
 namespace Asphalt.Storeable.CommonFileStorage
 {
-    public class FileStorageCollection : IStorageCollection
+    public class FileStorageContainer : IStorageContainer
     {
         protected string mDirectory;
 
         protected IDictionary<string, IStorage> mStorageCache = new Dictionary<string, IStorage>();
         protected IStorage mDefaultStorage;
         protected Dictionary<string, object> mDefaultValues;
-        protected IFileStorageSerializer mSerializer;
+        protected IConfigurationSerializer mSerializer;
 
-        public FileStorageCollection(IFileStorageSerializer pSerializer, string pDirectory, Dictionary<string, object> pDefaultValues = null)
+        public FileStorageContainer(IConfigurationSerializer pSerializer, string pDirectory, Dictionary<string, object> pDefaultValues = null)
         {
             mDirectory = pDirectory;
             mDefaultValues = pDefaultValues;
@@ -47,7 +47,7 @@ namespace Asphalt.Storeable.CommonFileStorage
 
         public string GetFilePath(string fileName)
         {
-            return Path.Combine(mDirectory, fileName) + mSerializer.GetFileExtension();
+            return Path.Combine(mDirectory, fileName + $".{mSerializer.FileExtension})");
         }
     }
 }

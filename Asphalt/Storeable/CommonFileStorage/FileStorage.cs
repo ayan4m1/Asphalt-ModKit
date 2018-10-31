@@ -18,17 +18,14 @@ namespace Asphalt.Storeable.CommonFileStorage
 
         protected bool mSaveDefaultValues;
 
-        protected IFileStorageSerializer mSerializer;
+        protected IConfigurationSerializer mSerializer;
 
-        public FileStorage(IFileStorageSerializer pSerializer, string pFileName, IDictionary<string, object> pDefaultValues = null, bool pSaveDefaultValues = false)
+        public FileStorage(IConfigurationSerializer pSerializer, string pFileName, IDictionary<string, object> pDefaultValues = null, bool pSaveDefaultValues = false)
         {
             Content = new Dictionary<string, object>();
 
-            FileName = pFileName;
             mSerializer = pSerializer;
-
-            if (string.IsNullOrEmpty(Path.GetExtension(FileName)))
-                FileName += mSerializer.GetFileExtension();
+            FileName = Path.ChangeExtension(pFileName, $".{mSerializer.FileExtension}");
 
             DefaultValues = pDefaultValues;
             mSaveDefaultValues = pSaveDefaultValues;

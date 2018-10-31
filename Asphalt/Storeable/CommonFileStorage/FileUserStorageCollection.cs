@@ -1,26 +1,24 @@
-﻿using Eco.Gameplay.Players;
+﻿using Asphalt.Service;
+using Eco.Gameplay.Players;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Asphalt.Storeable.CommonFileStorage
 {
-    public class FileUserStorageCollection : FileStorageCollection, IUserStorageCollection
+    public class FileUserStorageContainer : FileStorageContainer, IUserStorageContainer, IReloadable
     {
-        public FileUserStorageCollection(IFileStorageSerializer pSerializer, string pDirectory, Dictionary<string, object> pDefaultValues = null) : base(pSerializer, pDirectory, pDefaultValues)
+        public FileUserStorageContainer(IConfigurationSerializer serializer, string directory, Dictionary<string, object> defaultValues = null) : base(serializer, directory, defaultValues) { }
+
+        public IStorage GetUserStorage(User user)
         {
-        }
+            var id = user.SteamId ?? user.SlgId;
 
-        public IStorage GetStorage(User pUser)
-        {
-            //use steam ID if the file is already existant or the user only has a steam ID
-            if ((!string.IsNullOrEmpty(pUser.SteamId) && File.Exists(GetFilePath(pUser.SteamId))) || (string.IsNullOrEmpty(pUser.SlgId) && !string.IsNullOrEmpty(pUser.SteamId)))
-                return GetStorage(pUser.SteamId);
+            if (id != null)
+            {
+                return GetStorage(id);
+            }
 
-            if (!string.IsNullOrEmpty(pUser.SlgId))
-                return GetStorage(pUser.SlgId);
-
-            throw new InvalidOperationException($"User {pUser.Name} does not have an SteamID nor a SlgID. (This should not occur at all!)");
+            throw new InvalidOperationException($"User named {user.Name} with ID {user.Client.ID} does not have a SteamId nor an SlgId. This should never occur!");
         }
     }
 }

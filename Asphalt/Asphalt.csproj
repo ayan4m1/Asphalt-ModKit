@@ -102,7 +102,7 @@
     <Compile Include="Service\Permissions\PermissionGroup.cs" />
     <Compile Include="Service\PropertyFieldInfo.cs" />
     <Compile Include="Service\ServicePatches.cs" />
-    <Compile Include="Storeable\CommonFileStorage\IFileStorageSerializer.cs" />
+    <Compile Include="Storeable\CommonFileStorage\IConfigurationSerializer.cs" />
     <Compile Include="Storeable\GenericStoreable.cs" />
     <Compile Include="Storeable\IStorageCollection.cs" />
     <Compile Include="Storeable\Items\CraftingStoreable.cs" />
@@ -119,7 +119,6 @@
     <Compile Include="Storeable\StorageLocationAttribute.cs" />
     <Compile Include="Storeable\StorageFactory.cs" />
     <Compile Include="Storeable\Yaml\YamlFileStorageSerializer.cs" />
-    <Compile Include="Storeable\Yaml\YamlSerializationHelper.cs" />
     <Compile Include="Utils\AffineTransform.cs" />
     <Compile Include="Service\ServiceHelper.cs" />
     <Compile Include="Utils\BlockUtils.cs" />
