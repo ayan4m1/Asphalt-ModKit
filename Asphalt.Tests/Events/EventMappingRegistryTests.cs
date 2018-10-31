@@ -1,12 +1,8 @@
 ﻿using Asphalt.Events;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Asphalt.Tests
+namespace Asphalt.Tests.Events
 {
     [TestFixture]
     public class EventMappingRegistryTests
@@ -32,6 +28,12 @@ namespace Asphalt.Tests
             Assert.IsTrue(EventMappingRegistry.IsRegistered(eventType));
             EventMappingRegistry.Unregister(eventType);
             Assert.IsFalse(EventMappingRegistry.IsRegistered(eventType));
+        }
+
+        [Test]
+        public void CanRegisterMultipleMappings()
+        {
+            EventMappingRegistry.RegisterAll(this);
         }
 
         [Test]

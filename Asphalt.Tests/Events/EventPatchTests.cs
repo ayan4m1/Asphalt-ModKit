@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 
-namespace Asphalt.Tests
+namespace Asphalt.Tests.Events
 {
     [TestFixture]
     public class EventPatchTests
